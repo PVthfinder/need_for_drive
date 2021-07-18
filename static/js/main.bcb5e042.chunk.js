@@ -1,0 +1,2 @@
+(this.webpackJsonpneed_for_drive=this.webpackJsonpneed_for_drive||[]).push([[0],{10:function(e,n,r){"use strict";r.r(n);var t=r(1),c=r.n(t),i=r(3),o=r.n(i),s=(r(8),r(0));var d=function(){return Object(s.jsx)("div",{className:"App",children:"There will be a new project here..."})};o.a.render(Object(s.jsx)(c.a.StrictMode,{children:Object(s.jsx)(d,{})}),document.getElementById("root"))},8:function(e,n,r){}},[[10,1,2]]]);
+//# sourceMappingURL=main.bcb5e042.chunk.js.map
