@@ -1,0 +1,79 @@
+$btnStartColor--green: #0EC261;
+$btnEndColor--green: #039F67;
+$slideBtnStartColor--green: #13493F;
+$slideEndStartColor--green: #0C7B1B;
+$slideBtnStartColor--blue: #132949;
+$slideEndStartColor--blue: #0C7B67;
+$slideBtnStartColor--red: #493013;
+$slideEndStartColor--red: #7B0C3B;
+$slideBtnStartColor--purple: #281349;
+$slideEndStartColor--purple: #720C7B;
+
+@mixin btnColor ($colorStart, $colorEnd) {
+    background: 
+        linear-gradient(
+            90deg, 
+            $colorStart 2.61%, 
+            $colorEnd 112.6%
+        );
+
+    &:hover,
+    &:focus {
+        background: 
+            linear-gradient(
+                90deg, 
+                darken($colorStart, 10%) 2.61%, 
+                darken($colorEnd, 10%) 112.6%
+        );
+        background-blend-mode: darken;
+    }
+
+    &:active {
+        background: 
+            linear-gradient(
+                90deg, 
+                darken($colorStart, 20%) 2.61%, 
+                darken($colorEnd, 20%) 112.6%
+        );
+        background-blend-mode: darken;
+    }
+}
+
+.btn {
+    width: 250px;
+    height: 48px;
+    line-height: 48px;
+    border:none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+    @include btnColor($btnStartColor--green, $btnEndColor--green);
+
+    &--green {
+        @include btnColor($slideBtnStartColor--green, $slideEndStartColor--green);
+    }
+
+    &--blue {
+        @include btnColor($slideBtnStartColor--blue, $slideEndStartColor--blue);
+    }
+
+    &--red {
+        @include btnColor($slideBtnStartColor--red, $slideEndStartColor--red);
+    }
+
+    &--purple {
+        @include btnColor($slideBtnStartColor--purple, $slideEndStartColor--purple);
+    }
+
+    &--slider {
+        width: 164px;
+    }
+}
+
+@media (max-width: 768px) {
+    .btn {
+        width: 100%;
+        border-radius: 0;
+    }
+}

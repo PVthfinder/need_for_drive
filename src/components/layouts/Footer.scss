@@ -1,0 +1,41 @@
+.page_footer {
+    padding: 32px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__copyright,
+    &__phone {
+        font-size: 13px;
+        line-height: 15px;
+        color: #999999;
+    }    
+
+    &__phone {
+        color: #121212;
+
+        &:hover,
+        &:active {
+            color: #0EC261;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .page_footer {
+        padding: 16px;
+        flex-direction: column-reverse;
+        align-items: flex-end;
+        background: #151B1F;
+
+        &__phone {
+            margin-bottom: 8px;
+            color: #0EC261;
+
+            &:hover,
+            &:active {
+                color: #eeeeee;
+            }
+        }
+    }
+}
