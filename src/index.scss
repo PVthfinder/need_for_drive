@@ -5,7 +5,6 @@
 
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -20,8 +19,7 @@ a {
 }
 
 .app {
-  max-width: 1440px;
-  min-height: 811px;
+  height: 100vh;
   margin: 0 auto;
   display: flex;
   position: relative;
@@ -32,23 +30,4 @@ a {
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
-}
-
-@media (max-width: 1440px) {
-  .app {
-    max-width: 1024px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .app {
-    max-width: 768px;
-  }
-}
-
-@media (max-width: 768px) {
-  .app {
-    max-width: 320px;
-    min-height: 568px;
-  }
 }

@@ -6,7 +6,7 @@ import "./Home.scss";
 
 function Home() {
     return (
-        <div className="home_content">
+        <main className="home_content">
             <h1 className="home_content__title">
                 Каршеринг <br/><span>Need for drive</span>
             </h1>
@@ -14,7 +14,7 @@ function Home() {
                 Поминутная аренда авто твоего города
             </p>
             <Button title="Забронировать"/>
-        </div>
+        </main>
     )
 }
 

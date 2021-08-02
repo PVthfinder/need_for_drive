@@ -1,46 +1,50 @@
+@import "../../variables";
+
 .home_content {
     flex-grow: 1;
     padding: 131px 64px;
 
     &__title {
-        font-size: 70px;
-        line-height: 66px;
-        color: #121212;
+        font-family: $fontBold;
+        font-size: $fontSizeMainHeading;
+        line-height: $lineHeightMainHeading;
+        color: $mainBlackColor;
 
         span {
-            color: #0EC261;
+            color: $mainAccentColor;
         }
     }
 
     &__desc {
+        font-family: $fontLight;
         margin-top: 34px;
-        font-size: 26px;
-        line-height: 30px;
-        color: #999999;
+        font-size: $fontSizeMainDesc;
+        line-height: $lineHeightMainDesc;
+        color: $darkGreyColor;
         margin-bottom: 60px;
     }
 }
 
-@media (max-width: 1440px) {
+@media (max-width: $desctopSize) {
   .home_content {
     padding: 131px 32px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tabletSize) {
     .home_content {
         padding: 0;
 
         &__title {
             margin: 18px 16px;
-            font-size: 32px;
-            line-height: 100%;
+            font-size: $fontSizeMainHeading--mobile;
+            line-height: $lineHeightMainHeading--mobile;
         }
 
         &__desc {
             margin: 16px 16px 32px;
-            font-size: 18px;
-            line-height: 21px;
+            font-size: $fontSizeMainDesc--mobile;
+            line-height: $lineHeightMainDesc--mobile;
         }
       }
 }

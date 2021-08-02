@@ -1,0 +1,85 @@
+@font-face {
+    font-family: "Roboto Light";
+    font-style: normal;
+    font-weight: 300;
+    src: url(../src/assets/fonts/Roboto-Light.ttf)
+}
+  
+@font-face {
+    font-family: "Roboto Regular";
+    font-style: normal;
+    font-weight: 400;
+    src: url(../src/assets/fonts/Roboto-Regular.ttf)
+}
+  
+@font-face {
+    font-family: "Roboto Medium";
+    font-style: normal;
+    font-weight: 500;
+    src: url(../src/assets/fonts/Roboto-Medium.ttf)
+}
+
+@font-face {
+    font-family: "Roboto Bold";
+    font-style: normal;
+    font-weight: 700;
+    src: url(../src/assets/fonts/Roboto-Bold.ttf)
+}
+  
+$fontLight: "Roboto Light", sans-serif;
+$fontRegular: "Roboto Regular", sans-serif;
+$fontMedium: "Roboto Medium", sans-serif;
+$fontBold: "Roboto Bold", sans-serif;
+
+$desctopSize: 1440px;
+$desctopMinSize: 1024px;
+$tabletSize: 768px;
+$mobileSize: 320px;
+
+$mainAccentColor: #0EC261;
+$mainBlackColor: #121212;
+$menuBackgroundColor: #111518;
+$darkGreyColor: #999999;
+$lightkGreyColor: #eeeeee;
+$whiteColor: #ffffff;
+$footerColor--mobile: #151B1F;
+$btnStartColor--green: #0EC261;
+$btnEndColor--green: #039F67;
+$slideBtnStartColor--green: #13493F;
+$slideEndStartColor--green: #0C7B1B;
+$slideBtnStartColor--blue: #132949;
+$slideEndStartColor--blue: #0C7B67;
+$slideBtnStartColor--red: #493013;
+$slideEndStartColor--red: #7B0C3B;
+$slideBtnStartColor--purple: #281349;
+$slideEndStartColor--purple: #720C7B;
+
+$fontSizeMainHeading: 70px;
+$fontSizeMainHeading--mobile: 32px;
+$fontSizeMainDesc: 26px;
+$fontSizeMainDesc--mobile: 18px;
+$fontSizeLogo: 30px;
+$fontSizeLocation: 14px;
+$fontSizeSliderHeading: 40px;
+$fontSizeSliderHeading--tablet: 32px;
+$fontSizeSliderDesc: 24px;
+$fontSizeSliderDesc--mobile: 22px;
+$fontSizeBtn: 18px;
+$fontSizeFooter: 13px;
+$fontSizeMenuItem: 32px;
+$fontSizeMenuItem--mobile: 22px;
+
+$lineHeightMainHeading: 66px;
+$lineHeightMainHeading--mobile: 32px;
+$lineHeightMainDesc: 30px;
+$lineHeightMainDesc--mobile: 21px;
+$lineHeightLogo: 35px;
+$lineHeightLocation: 16px;
+$lineHeightSliderHeading: 47px;
+$lineHeightSliderHeading--tablet: 37px;
+$lineHeightSliderDesc: 22px;
+$lineHeightSliderDesc--mobile: 22px;
+$lineHeightBtn: 21px;
+$lineHeightFooter: 15px;
+$lineHeightMenuItem: 37px;
+$lineHeightMenuItem--mobile: 26px;

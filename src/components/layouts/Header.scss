@@ -1,3 +1,5 @@
+@import "../../_variables.scss";
+
 .page_header {
     padding: 32px 64px;
     display: flex;
@@ -6,38 +8,36 @@
 }
 
 .logo {
-    color: #0EC261;
-    font-size: 30px;
-    line-height: 35px;
+    font-family: $fontBold;
+    color: $mainAccentColor;
+    font-size: $fontSizeLogo;
+    line-height: $lineHeightLogo;
 }
 
 .location {
-    font-size: 14px;
-    line-height: 16px;  
-    color: #999999;
+    font-family: $fontRegular;
+    font-size: $fontSizeLocation;
+    line-height: $lineHeightLocation;  
+    color: $darkGreyColor;
     display: flex;
     align-items: center;
 
     &__icon {
-        margin-right: 5px;
+        margin-right: 7px;
     }
 
     &__locality {
-        font-size: 14px;
-        line-height: 16px;  
-        color: #999999;
-        display: inline-block;
-        border-color: transparent;
-        outline: none;
-        padding: 0 2px;
+        font-size: $fontSizeLocation;
+        line-height: $lineHeightLocation;  
+        color: $darkGreyColor;
 
         &:focus {
-            border-bottom: 1px solid #999999;
+            border-bottom: 1px solid $darkGreyColor;
         }
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tabletSize) {
     .page_header {
         padding: 16px;
         flex-direction: column;

@@ -10,17 +10,11 @@ function Slider({slides}) {
     const [activeSlide, setActiveSlide] = useState(0);
     
     const onNextSlide = () => {
-        setActiveSlide((current) => {
-            const res = current === slides.length -1 ? 0 : current + 1;
-            return res;
-        })
+        setActiveSlide((current) => current === slides.length -1 ? 0 : current + 1)
     }
 
     const onPrevSlide = () => {
-        setActiveSlide((current) => {
-            const res = current ? current - 1 : slides.length -1;
-            return res;
-        })
+        setActiveSlide((current) => current ? current - 1 : slides.length -1)
     }
 
     const prevImgIndex = activeSlide ? activeSlide - 1 : slides.length - 1;

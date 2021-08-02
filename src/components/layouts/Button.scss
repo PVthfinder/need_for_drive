@@ -1,13 +1,4 @@
-$btnStartColor--green: #0EC261;
-$btnEndColor--green: #039F67;
-$slideBtnStartColor--green: #13493F;
-$slideEndStartColor--green: #0C7B1B;
-$slideBtnStartColor--blue: #132949;
-$slideEndStartColor--blue: #0C7B67;
-$slideBtnStartColor--red: #493013;
-$slideEndStartColor--red: #7B0C3B;
-$slideBtnStartColor--purple: #281349;
-$slideEndStartColor--purple: #720C7B;
+@import "../../_variables.scss";
 
 @mixin btnColor ($colorStart, $colorEnd) {
     background: 
@@ -40,13 +31,14 @@ $slideEndStartColor--purple: #720C7B;
 }
 
 .btn {
+    font-family: $fontMedium;
     width: 250px;
     height: 48px;
     line-height: 48px;
     border:none;
     border-radius: 8px;
-    color: #ffffff;
-    font-size: 18px;
+    color: $whiteColor;
+    font-size: $fontSizeBtn;
     cursor: pointer;
     @include btnColor($btnStartColor--green, $btnEndColor--green);
 
@@ -71,9 +63,10 @@ $slideEndStartColor--purple: #720C7B;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tabletSize) {
     .btn {
         width: 100%;
         border-radius: 0;
+        margin-bottom: 173px;
     }
 }

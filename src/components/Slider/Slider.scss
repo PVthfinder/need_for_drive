@@ -1,3 +1,5 @@
+@import "../../variables";
+
 .slider {
   position: relative;
   width: 688px;
@@ -16,26 +18,19 @@
       transition: transform 0.5s;
       padding: 237px 96px 100px;
       box-sizing: border-box;
-      color: #ffffff;
-      background-image: url("../../assets/images/background.png");
-      overflow: hidden;
-
-      img {
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: -1;
-      }
+      color: $whiteColor;
 
       &__heading {
-        font-size: 40px;
-        line-height: 47px;
+        font-family: $fontMedium;
+        font-size: $fontSizeSliderHeading;
+        line-height: $lineHeightSliderHeading;
         margin-bottom: 8px;
       }
 
       &__description {
-        font-size: 24px;
-        line-height: 100%;
+        font-family: $fontLight;
+        font-size: $fontSizeSliderDesc;
+        line-height: $lineHeightSliderDesc;
         margin-bottom: 32px;
       }
     }
@@ -60,7 +55,7 @@
     cursor: pointer;
 
     img {
-      color: #eeeeee;
+      color: $lightkGreyColor;
     }
 
     &:hover {
@@ -85,7 +80,7 @@
   }
 }
 
-@media (max-width: 1440px) {
+@media (max-width: $desctopSize) {
   .slider {
     width: 410px;
 
@@ -100,13 +95,13 @@
         }
   
         &__heading {
-          font-size: 32px;
-          line-height: 37px;
+          font-size: $fontSizeSliderHeading--tablet;
+          line-height: $lineHeightSliderHeading--tablet;
         }
   
         &__description {
-          font-size: 22px;
-          line-height: 100%;
+          font-size: $fontSizeSliderDesc--mobile;
+          line-height: $lineHeightSliderDesc--mobile;
         }
       }
 
@@ -118,7 +113,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: $desctopMinSize) {
   .slider {
     display: none;
   }

@@ -11,18 +11,17 @@ function Header() {
         <header className="page_header">
             <a href="#!" className="logo">Need for drive</a>
             <div className="location">
-                <label for="location_input" className="location__icon">
+                <div className="location__icon">
                     <img src={iconLocation} alt="iconLocation" />
-                </label>
-                <input 
+                </div>
+                <div 
                     type="text" 
                     id="location_input" 
                     className="location__locality"
-                    onChange={(event) => {setLocationValue(event.target.value)}}
-                    value={locationValue}
                     style={{width: `${locationValue.length * 8}px`}}
-                    autoComplete="on"
-                />
+                >
+                    {locationValue}
+                </div>
             </div>
         </header>
     )

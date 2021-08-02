@@ -13,6 +13,11 @@ function Slide({prevImgIndex, nextImgIndex, slide}) {
                     nextImgIndex ? "slide_next" : null
                 )
             }
+            style={{
+                background: 
+                `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%),
+                url(${slide.img}) center / cover no-repeat`
+            }}
         >
             <h2 className="slide__heading">{slide.heading}</h2>
             <p className="slide__description">{slide.desc}</p>
@@ -21,7 +26,6 @@ function Slide({prevImgIndex, nextImgIndex, slide}) {
                 color={slide.color} 
                 location="btn--slider"
             />
-            {slide.img}
         </div>
     )
 }
