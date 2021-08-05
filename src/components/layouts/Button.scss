@@ -1,0 +1,72 @@
+@import "../../_variables.scss";
+
+@mixin btnColor ($colorStart, $colorEnd) {
+    background: 
+        linear-gradient(
+            90deg, 
+            $colorStart 2.61%, 
+            $colorEnd 112.6%
+        );
+
+    &:hover,
+    &:focus {
+        background: 
+            linear-gradient(
+                90deg, 
+                darken($colorStart, 10%) 2.61%, 
+                darken($colorEnd, 10%) 112.6%
+        );
+        background-blend-mode: darken;
+    }
+
+    &:active {
+        background: 
+            linear-gradient(
+                90deg, 
+                darken($colorStart, 20%) 2.61%, 
+                darken($colorEnd, 20%) 112.6%
+        );
+        background-blend-mode: darken;
+    }
+}
+
+.btn {
+    font-family: $fontMedium;
+    width: 250px;
+    height: 48px;
+    line-height: 48px;
+    border:none;
+    border-radius: 8px;
+    color: $whiteColor;
+    font-size: $fontSizeBtn;
+    cursor: pointer;
+    @include btnColor($btnStartColor--green, $btnEndColor--green);
+
+    &--green {
+        @include btnColor($slideBtnStartColor--green, $slideEndStartColor--green);
+    }
+
+    &--blue {
+        @include btnColor($slideBtnStartColor--blue, $slideEndStartColor--blue);
+    }
+
+    &--red {
+        @include btnColor($slideBtnStartColor--red, $slideEndStartColor--red);
+    }
+
+    &--purple {
+        @include btnColor($slideBtnStartColor--purple, $slideEndStartColor--purple);
+    }
+
+    &--slider {
+        width: 164px;
+    }
+}
+
+@media (max-width: $tabletSize) {
+    .btn {
+        width: 100%;
+        border-radius: 0;
+        margin-bottom: 173px;
+    }
+}
