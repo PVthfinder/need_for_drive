@@ -1,0 +1,104 @@
+@import "../../variables";
+
+.order_content {
+    &__location {
+        font-family: $fontLight;
+        font-size: $fontSizeSimpleText;
+        line-height: $lineHeightSimpleText;
+        color: $mainBlackColor;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .location_inputs {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+
+            &__item {
+                position: relative;
+                display: flex;
+                align-items: center;
+    
+                &:not(:last-child) {
+                    margin-bottom: 16px;
+                }
+    
+                label {
+                    margin-right: 8px;
+                }
+            }
+
+            &__value {
+                width: 224px;
+                border-bottom: 1px solid $darkGreyColor;
+                display: flex;
+                position: relative;
+    
+                input {
+                    border: none;
+                    padding: 3px 8px;
+                    box-sizing: border-box;
+                    color: $darkGreyColor;
+                    flex-grow: 1;
+    
+                    &:focus {
+                        outline: none;
+                        color: $mainBlackColor;
+                    }
+                }
+    
+                .clear_input {
+                    content: url("../../assets/images/close_icon.svg");
+                    right: 8px;
+                    cursor: pointer;
+                    margin-right: 8px;
+                }
+            }
+            
+            &__selector {
+                position: absolute;
+                width: 100%;
+                left: 0;
+                top: 100%;
+                height: 0;
+                opacity: 0;
+                overflow: auto;
+                display: flex;
+                flex-direction: column;
+                padding: 8px 8px;
+                box-sizing: border-box;
+                background-color: $whiteColor;
+                border: 1px solid $lightkGreyColor;
+                transition: all 0.3s ease-in;
+
+                li:not(:last-child) {
+                    margin-bottom: 8px;
+                }
+
+                li {
+                    &:hover {
+                        cursor: default;
+                        color: $mainAccentColor;
+                    }
+                }
+
+                &.active {
+                    max-height: 106px;
+                    height: auto;
+                    opacity: 1;
+                    z-index: 1;
+                }
+            }
+
+        }
+
+        .map {
+            margin-top: 48px;
+
+            &__heading {
+                margin-bottom: 16px;
+            }
+        }
+    }
+}
