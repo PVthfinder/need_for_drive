@@ -63,3 +63,21 @@
     }
   }
 }
+
+@media (max-width: $tabletSize) {
+    .order_content {
+        &__summary {
+            flex-grow: 1;
+            width: 100%;
+            border-left: none;
+            border-top: 1px solid $lightkGreyColor;
+            padding: 0;
+        }
+
+        &__summary_heading,
+        &__summary_item,
+        &__total_price {
+            margin: 16px;                
+        }
+      }
+}

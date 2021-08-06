@@ -102,3 +102,17 @@
         }
     }
 }
+
+@media (max-width: $desctopSize) {
+    .map {
+        img {
+            width: 500px;
+        }
+    }
+}
+
+@media (max-width: $desctopMinSize) {
+    .map {
+        display: none;
+    }
+}

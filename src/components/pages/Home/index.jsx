@@ -23,7 +23,10 @@ function Home() {
                         Поминутная аренда авто твоего города
                     </p>
                     <Link to="/order">
-                        <Button title="Забронировать"/>
+                        <Button 
+                        title="Забронировать"
+                        activeBtn={true}
+                        />
                     </Link>
                 </main>
                 <Footer/>

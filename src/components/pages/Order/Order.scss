@@ -18,3 +18,14 @@
     }
   }
 }
+
+@media (max-width: $tabletSize) {
+    .order_content {
+        flex-direction: column;
+        
+        &__main {
+          padding: 0;
+          margin: 16px;
+      }
+    }
+}
