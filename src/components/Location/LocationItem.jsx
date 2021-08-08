@@ -9,6 +9,15 @@ function LocationItem({inputValue, setInputValue, selectorArr, label, placeholde
         setActiveInput(false);
     }
 
+    const selectorClasses = classNames(
+        "location_inputs__selector", 
+        {[`active`]: 
+            activeInput && 
+            inputValue.length > 0 
+            && selectorArr.length > 0
+        }
+    );
+
     return (
         <div className="location_inputs__item">
             <label htmlFor="town_input">{label}</label>
@@ -26,14 +35,7 @@ function LocationItem({inputValue, setInputValue, selectorArr, label, placeholde
                 />
                 
                 <ul 
-                    className={classNames(
-                            "location_inputs__selector", 
-                            {[`active`]: 
-                                activeInput && 
-                                inputValue.length > 0 
-                                && selectorArr.length > 0
-                            }
-                        )}
+                    className={selectorClasses}
                 >
                     {selectorArr && selectorArr.map(item => (
                         <li 

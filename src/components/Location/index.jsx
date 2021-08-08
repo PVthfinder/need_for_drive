@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from "react";
 
 import LocationItem from "./LocationItem";
+import LocationMap from "./LocationMap";
 
 import {locations} from "../../assets/db";
-
-import map from "../../assets/images/map.png";
 
 import "./Location.scss";
 
@@ -48,10 +47,11 @@ function Location({townValue, setTownValue, pointValue, setPointValue}) {
                 />
             </div>
             
-            <div className="map">
-                <p className="map__heading">Выбрать на карте</p>
-                <img src={map} alt="map" />
-            </div>
+            <LocationMap 
+                town={townValue}
+                point={pointValue}
+                points={locations[townValue]}
+            />
         </div>
     )
 }

@@ -95,12 +95,28 @@
 
         .map {
             margin-top: 48px;
+            width: 732px;
+            height: 352px;
 
             &__heading {
                 margin-bottom: 16px;
             }
         }
     }
+}
+
+.ymaps-2-1-79-map-copyrights-promo,
+.ymaps-2-1-79-copyright.ymaps-2-1-79-copyright_logo_no,
+.ymaps-2-1-79-balloon.ymaps-2-1-79-balloon_layout_panel.ymaps-2-1-79-i-custom-scroll.ymaps-2-1-79-islets_balloon_layout_panel {
+    display: none;
+}
+
+[class*="ymaps-2"][class*="-ground-pane"] {
+    filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -o-filter: grayscale(1);
 }
 
 @media (max-width: $desctopSize) {

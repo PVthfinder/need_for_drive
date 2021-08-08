@@ -4,15 +4,17 @@ import classNames from 'classnames';
 import "./Button.scss";
 
 function Button({title, color, location, activeBtn}) {
+    const btnClasses = classNames(
+        "btn", 
+        location, 
+        {[`btn--${color}`]: color}
+    );
+
     return (
         <input 
             type="button" 
             value={title} 
-            className={classNames(
-                "btn", 
-                location, 
-                {[`btn--${color}`]: color}
-            )}
+            className={btnClasses}
             disabled={!activeBtn}
         />
     )

@@ -6,7 +6,7 @@ import iconLocation from "../../../assets/images/location_icon.svg";
 import "./Header.scss";
 
 function Header({townValue}) {
-    townValue = (townValue && townValue.length)? townValue : "Ульяновск";
+    townValue = (townValue && townValue.length)? townValue : '';
 
     return (
         <header className="page_header">
