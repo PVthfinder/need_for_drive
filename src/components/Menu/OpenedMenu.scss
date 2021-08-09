@@ -29,6 +29,14 @@
         transform: scale(1);
         opacity: 1;
     }
+
+    &.order_menu {
+        background: linear-gradient(
+            to right, 
+            $menuBackgroundColor 0%, 
+            $menuBackgroundColor 100%);
+    }
+        
 }
 
 @media (max-width: $desctopSize) {
