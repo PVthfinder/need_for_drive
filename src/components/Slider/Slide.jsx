@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import {Link} from 'react-router-dom';
 
 import Button from '../layouts/Button';
 
@@ -21,13 +22,6 @@ function Slide({prevImgIndex, nextImgIndex, slide}) {
         >
             <h2 className="slide__heading">{slide.heading}</h2>
             <p className="slide__description">{slide.desc}</p>
-<<<<<<< Updated upstream
-            <Button 
-                title="Подробнее" 
-                color={slide.color} 
-                location="btn--slider"
-            />
-=======
             <Link to="/order/location">
                 <Button 
                     title="Подробнее" 
@@ -36,7 +30,6 @@ function Slide({prevImgIndex, nextImgIndex, slide}) {
                     activeBtn={true}
                 />
             </Link>
->>>>>>> Stashed changes
         </div>
     )
 }

@@ -25,7 +25,7 @@ function OrderSummary({town, pointValue, activeBtn, activeCar}) {
             >
                 <span>Модель</span>
                 <span className="dots_border"></span>
-                <span className="item_value">{activeCar.name}</span>
+                <span className="item_value">{activeCar ? activeCar.name : null}</span>
             </div>
 
             <p className="order_content__total_price">

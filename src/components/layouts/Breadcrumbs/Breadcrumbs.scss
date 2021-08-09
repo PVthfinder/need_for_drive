@@ -15,7 +15,7 @@
         position: relative;
 
         &:not(:first-child)::before {
-            content: url("../../../assets/images/breadscrumbs_arrow.svg");
+            content: url("../../../assets/images/breadcrumbs_arrow.svg");
             display: inline-block;
             position: absolute;
             top: 0;

@@ -1,0 +1,56 @@
+@import "../../../_variables.scss";
+
+.page_header {
+    padding: 32px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__location {
+        font-family: $fontRegular;
+        font-size: $fontSizeSimpleText;
+        line-height: $lineHeightSimpleText;  
+        color: $darkGreyColor;
+        display: flex;
+        align-items: center;
+    
+        .icon {
+            margin-right: 7px;
+        }
+    
+        .locality {
+            font-size: $fontSizeSimpleText;
+            line-height: $lineHeightSimpleText;  
+            color: $darkGreyColor;
+    
+            &:focus {
+                border-bottom: 1px solid $darkGreyColor;
+            }
+        }
+    }
+}
+
+.logo {
+    font-family: $fontBold;
+    color: $mainAccentColor;
+    font-size: $fontSizeLogo;
+    line-height: $lineHeightLogo;
+}
+
+@media (max-width: $desctopSize) {
+  .page_header {
+    padding: 32px;
+  }
+}
+
+@media (max-width: $tabletSize) {
+    .page_header {
+        padding: 16px;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .logo {
+        margin-bottom: 9px;
+    }
+}
