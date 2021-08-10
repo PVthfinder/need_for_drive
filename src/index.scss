@@ -18,6 +18,10 @@ a {
   text-decoration: none;
 }
 
+ul {
+  list-style: none;
+}
+
 .app {
   height: 100vh;
   margin: 0 auto;
@@ -25,7 +29,7 @@ a {
   position: relative;
 }
 
-.home_page {
+.page {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

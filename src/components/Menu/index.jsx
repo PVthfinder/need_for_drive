@@ -1,5 +1,7 @@
-import React, {useState} from "react";
+import React, {useContext} from "react";
 import classNames from 'classnames';
+
+import { AppContext } from '../../context';
 
 import Link from "./Link";
 import Social from "./Social";
@@ -11,26 +13,41 @@ import "./Links.scss";
 import "./Socials.scss";
 import "./OpenedMenu.scss";
 
-function Menu() {    
-    const [openMenu, setOpenMenu] = useState(false);
+function Menu({isOrderPage}) {    
+    const {openMenu, setOpenMenu} = useContext(AppContext);
 
-    const openedClass = openMenu ? "opened" : null;
+    const menuClasses = classNames(
+            "menu__icon", 
+            {[`opened`]: openMenu}, 
+            {[`menu_order`]: isOrderPage}
+        )
+
+    const openedMenuClasses = classNames(
+            "opened_menu", 
+            {[`opened`]: openMenu},
+            {[`order_menu`]: isOrderPage}
+        )
 
     return (
         <>
             <div className="menu">
                 <div 
-                    className={classNames("menu__icon", openedClass)} 
-                    onClick={() => setOpenMenu(!openMenu)}
+                    className={menuClasses} 
+                    onClick={() => setOpenMenu()}
                 >
                     <span/>
                 </div>
-                <button className={classNames("menu__lang_switch", openedClass)}>
+                <button 
+                    className={classNames(
+                        "menu__lang_switch", 
+                        {[`opened`]: openMenu}
+                    )}
+                >
                     Eng
                 </button>
             </div>
             <div 
-                className={classNames("opened_menu", openedClass)}
+                className={openedMenuClasses}
             >
                 <div className="menu__links">
                     {links.map((link, index) => (
@@ -38,7 +55,7 @@ function Menu() {
                             key={link.title} 
                             title={link.title} 
                             path={link.path}
-                            openedClass={openedClass}
+                            openedClass={{[`opened`]: openMenu}}
                             index={index}
                             linksArr={links}
                         />
@@ -50,7 +67,7 @@ function Menu() {
                             key={`social${index}`} 
                             img={link.img} 
                             path={link.path}
-                            openedClass={openedClass}
+                            openedClass={{[`opened`]: openMenu}}
                             index={index}
                             socialsArr={socials}
                         />

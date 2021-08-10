@@ -1,0 +1,117 @@
+@import "../../variables";
+
+.order_content {
+    &__models {
+        height: 0;
+
+        .radios {
+            display: flex;
+            flex-wrap: wrap;
+            font-family: $fontLight;
+            font-size: $fontSizeSimpleText;
+            line-height: $lineHeightSimpleText;
+            color: $darkGreyColor;
+
+            .car_category {
+                    margin-left: 20px;
+
+                    &:not(:last-child) {
+                        margin-right: 16px;
+                    }
+
+                input{
+                    display: none;
+
+                    &:checked + label {
+                        &::before {
+                            border: 3px solid $mainAccentColor;
+                        }
+                    }
+                }
+                
+                label {
+                    position: relative;
+                    cursor: pointer;
+
+                    &::before {
+                        content: "";
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        border: 1px solid $darkGreyColor;
+                        box-sizing: border-box;
+                        position: absolute;
+                        top: 50%;
+                        left: -8px;
+                        transform: translate(-100%, -50%);
+                        transition: border 0.1s ease-in;
+                    }
+                }
+            }
+        }
+    }
+
+    &__cars {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(368px, 1fr));
+        border-top: 1px solid $lightkGreyColor;
+        border-left: 1px solid $lightkGreyColor;
+        margin-top: 48px;
+
+        .car_card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-family: $fontRegular;
+            border-right: 1px solid $lightkGreyColor;
+            border-bottom: 1px solid $lightkGreyColor;
+            height: 224px;
+            padding: 16px;
+            box-sizing: border-box;
+            overflow: hidden;
+            cursor: pointer;
+
+            &__name {
+                font-size: $fontSizeCarHeading;
+                line-height: $lineHeightCarHeading;
+                color: $mainBlackColor;
+                text-transform: uppercase;
+            }
+
+            &__price {
+                font-size: $fontSizeSimpleText;
+                line-height: $lineHeightSimpleText;
+                color: $darkGreyColor;
+            }
+
+            &__img {
+                width: 256px;
+                align-self: flex-end;
+            }
+
+            &:hover {
+                outline: 1px solid $darkGreyColor;
+            }
+
+            &.active {
+                outline: 1px solid $mainAccentColor;
+            }
+        }
+    }
+
+    &__nothing_found {
+        font-family: $fontLight;
+        font-size: $fontSizeSimpleText;
+        line-height: $lineHeightSimpleText;
+        color: $darkGreyColor;
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: $desctopMinSize) {
+  .order_content {
+    &__cars {
+        grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    }
+  }
+}

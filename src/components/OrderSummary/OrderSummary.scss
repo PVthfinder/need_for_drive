@@ -1,0 +1,78 @@
+@import "../../variables";
+
+.order_content {
+    &__summary {
+        width: 384px;
+        border-left: 1px solid $lightkGreyColor;
+        padding: 32px 63px 32px 32px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__summary_heading {
+        text-align: end;
+        font-family: $fontMedium;
+        font-size: $fontSizeSummaryHeading;
+        line-height: $lineHeightSummaryHeading;
+        color: $mainBlackColor;
+        margin-bottom: 26px;
+    }
+
+    &__total_price {
+        font-family: $fontMedium;
+        font-size: $fontSizeSummaryTotalPrice;
+        line-height: $lineHeightSummaryTotalPrice;
+        color: $mainBlackColor;
+        margin: 32px 0;
+    }
+
+    &__summary_item {
+        font-family: $fontLight;
+        font-size: $fontSizeSimpleText;
+        line-height: $lineHeightSimpleText;
+        color: $darkGreyColor;
+        justify-content: space-between;
+        align-items: flex-end;
+        display: none;
+
+        span{
+            &:first-child {
+                color: $mainBlackColor;
+            }
+        }
+        
+        .dots_border {
+            border-bottom: 1px dotted $darkGreyColor;
+            flex-grow: 1;
+            margin: 0 12px;
+        }
+
+        .item_value {
+            max-width: 105px;
+            word-break: normal;
+            text-align: end;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 16px;
+        }
+    }
+}
+
+@media (max-width: $tabletSize) {
+    .order_content {
+        &__summary {
+            width: 100%;
+            border-left: none;
+            border-top: 1px solid $lightkGreyColor;
+            padding: 0;
+        }
+
+        &__summary_heading,
+        &__summary_item,
+        &__total_price {
+            margin: 16px;                
+        }
+      }
+}

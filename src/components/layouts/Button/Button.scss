@@ -1,4 +1,4 @@
-@import "../../_variables.scss";
+@import "../../../_variables.scss";
 
 @mixin btnColor ($colorStart, $colorEnd) {
     background: 
@@ -58,8 +58,24 @@
         @include btnColor($slideBtnStartColor--purple, $slideEndStartColor--purple);
     }
 
+    &:disabled {
+        background: $lightkGreyColor;
+    }
+
     &--slider {
         width: 164px;
+    }
+
+    &--order {
+        width: 287px;
+    }
+}
+
+@media (max-width: $desctopSize) {
+    .btn {
+        &--order {
+            width: 200px;
+        }
     }
 }
 
