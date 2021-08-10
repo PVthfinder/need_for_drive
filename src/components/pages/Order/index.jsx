@@ -21,6 +21,7 @@ function Order() {
     const [carsCategories, setCarsCategories] = useState([]);
     const [category, setCategory] = useState('all');
     const [activeCar, setActiveCar] = useState(null);
+    const [paginationPage, setPaginationPage] = useState(0);
     
     const {pathname} = useLocation();
 
@@ -29,12 +30,12 @@ function Order() {
     }, [townValue, pointValue]);
 
     useEffect(() => {
-        getAllCars()
+        getAllCars(paginationPage)
             .then(data => {
-                setCars(data.data);
-                setFilteredCars(data.data)
+                setCars(currentCars => [...currentCars, ...data.data]);
+                setFilteredCars(currentCars => [...currentCars, ...data.data]);
             });
-    }, []);
+    }, [paginationPage]);
 
     useEffect(() => {
         getCarsCategories()
@@ -55,6 +56,12 @@ function Order() {
         //eslint-disable-next-line
     }, [category]);
 
+    const onScroll = (evt) => {
+        if (evt.target.offsetHeight + evt.target.scrollTop === evt.target.scrollHeight) {
+            setPaginationPage(currentPage => currentPage + 1);
+          }
+    }
+
     return (
         <>
             <Menu
@@ -64,7 +71,10 @@ function Order() {
                 <Header townValue={townValue}/>
                 <Breadcrumbs/>
                 <div className="order_content">
-                    <div className="order_content__main">
+                    <div 
+                        className="order_content__main"  
+                        onScroll={(e) => onScroll(e)}
+                    >
                         {pathname.includes('location') &&
                             <Location 
                                 townValue={townValue}
@@ -82,6 +92,7 @@ function Order() {
                                 setCategory={setCategory}
                                 activeCar={activeCar}    
                                 setActiveCar={setActiveCar}
+                                onScroll={onScroll}
                             />
                         }
                     </div>

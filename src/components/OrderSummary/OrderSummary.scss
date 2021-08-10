@@ -71,7 +71,6 @@
 @media (max-width: $tabletSize) {
     .order_content {
         &__summary {
-            flex-grow: 1;
             width: 100%;
             border-left: none;
             border-top: 1px solid $lightkGreyColor;

@@ -1,7 +1,7 @@
 import {API_KEY, API_AUTH, API_URL} from './config';
 
-const getAllCars = async () => {
-    const response = await fetch(`${API_URL}car?limit=30`, {
+const getAllCars = async (page) => {
+    const response = await fetch(`${API_URL}car?page=${page}&limit=12`, {
         headers: {
             'X-Api-Factory-Application-Id': API_KEY,
             'Authorization': API_AUTH

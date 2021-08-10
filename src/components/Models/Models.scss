@@ -6,6 +6,7 @@
 
         .radios {
             display: flex;
+            flex-wrap: wrap;
             font-family: $fontLight;
             font-size: $fontSizeSimpleText;
             line-height: $lineHeightSimpleText;
@@ -97,4 +98,12 @@
             }
         }
     }
+}
+
+@media (max-width: $desctopMinSize) {
+  .order_content {
+    &__cars {
+        grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    }
+  }
 }
