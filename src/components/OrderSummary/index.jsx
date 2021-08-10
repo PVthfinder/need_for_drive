@@ -30,8 +30,9 @@ function OrderSummary({town, pointValue, activeBtn, activeCar}) {
 
             <p className="order_content__total_price">
                 {`Цена: от 
-                ${activeCar ? activeCar.priceMin : "---"} до 
-                ${activeCar ? activeCar.priceMax : "---"}`}
+                ${activeCar ? activeCar.priceMin.toLocaleString() : "---"} до 
+                ${activeCar ? activeCar.priceMax.toLocaleString() : "---"} `}
+                &#8381;
             </p>
 
             <Link to="/order/model">
