@@ -22,7 +22,11 @@ function Model({model, activeCar, setActiveCar}) {
                     `${priceMin.toLocaleString()} - ${priceMax.toLocaleString()} `
                 }&#8381;</p>
             </div>
-            <img className="car_card__img" src={thumbnail.path} alt={name} />
+            <img 
+                className="car_card__img" 
+                src={thumbnail.path.includes('data') ? thumbnail.path :`https://api-factory.simbirsoft1.com${thumbnail.path}`} 
+                alt={name} 
+            />
         </div>
     )
 }

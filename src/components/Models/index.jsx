@@ -39,19 +39,22 @@ function Models({cars, categories, category, setCategory, activeCar, setActiveCa
                         ))
                     }
                 </div>
-
-                <div className="order_content__cars">
-                    {
-                        cars.length && cars.map(item => (
+                
+                {
+                    cars.length ? 
+                    <div className="order_content__cars">
+                        {cars.map(item => (
                             <Model 
                                 key={item.id}
                                 model={item}
                                 activeCar={activeCar}
-                                setActiveCar={setActiveCar}
                             />
-                        ))
-                    }
-                </div>
+                        ))}
+                    </div> :
+                    <p className="order_content__nothing_found">
+                        Приносим извинения, нет машин выбранного класса.
+                    </p>
+                }
         </div>
     )
 }

@@ -98,6 +98,14 @@
             }
         }
     }
+
+    &__nothing_found {
+        font-family: $fontLight;
+        font-size: $fontSizeSimpleText;
+        line-height: $lineHeightSimpleText;
+        color: $darkGreyColor;
+        margin-top: 40px;
+    }
 }
 
 @media (max-width: $desctopMinSize) {
