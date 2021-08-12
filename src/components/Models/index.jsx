@@ -13,12 +13,12 @@ function Models({cars, categories, category, setCategory, activeCar, setActiveCa
                         <input 
                             name="type" 
                             type="radio"
-                            id="radio_all"
+                            id="filter_all"
                             value="all"
                             onChange={(evt) => setCategory(evt.target.value)} 
                             checked={category === "all"}
                         />
-                        <label htmlFor="radio_all">All</label>
+                        <label htmlFor="filter_all">All</label>
                     </div>
                     {
                         categories.length && categories.map(item => (
@@ -29,12 +29,12 @@ function Models({cars, categories, category, setCategory, activeCar, setActiveCa
                                 <input 
                                     name="type" 
                                     type="radio"
-                                    id={`radio_${item.name}`}
+                                    id={`filter_${item.name}`}
                                     value={item.name}
                                     onChange={(evt) => setCategory(evt.target.value)} 
                                     checked={category === item.name}
                                 />
-                                <label htmlFor={`radio_${item.name}`}>{item.name}</label>
+                                <label htmlFor={`filter_${item.name}`}>{item.name}</label>
                             </div>
                         ))
                     }

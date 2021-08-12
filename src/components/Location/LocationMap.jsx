@@ -3,46 +3,66 @@ import { YMaps, Map, Placemark } from "react-yandex-maps";
 
 import mark from "../../assets/images/map_point.svg";
 
-function LocationMap({town, point, points}) {
-    const [zoom, setZoom] = useState(3)
-    const [centerCoord, setCenterCoord] = useState([64.010196, 98.911043]);
+function LocationMap({town, choosenPoint, points}) {
+    const defaultTownCoord = [54.314192, 48.403132];
+    const defaultZoom = 11;
+    const ymapsQuery = {
+        ns: "use-load-option",
+        apikey: "8c90fd8a-c183-4c74-8251-ef9e96797de6"
+    };
+
+    const [zoom, setZoom] = useState(defaultZoom)
+    const [centerCoord, setCenterCoord] = useState(defaultTownCoord);
     const [pointsCoord, setPointsCoord] = useState([]);
 
     const maps = useRef();
 
     useEffect(() => {
         if (maps.current) {
-            if (!point) {
+            if (!town) {
+                setCenterCoord(defaultTownCoord);
+                setZoom(defaultZoom);
+            } else {
                 maps.current.geocode(town)
                 .then(result => setCenterCoord(
                     result.geoObjects.get(0).geometry.getCoordinates()
                 ));
-                setZoom(11);
-            } else {
-                maps.current.geocode(`${town} ${point}`)
-                .then(result => setCenterCoord(
-                    result.geoObjects.get(0).geometry.getCoordinates()
-                ));
-                setZoom(15);
+                setZoom(defaultZoom);
             }
         }
         //eslint-disable-next-line
-    }, [town, point]);
+    }, [town]);
 
     useEffect(() => {
-        if(points) {      
-            const newPointsArr = [];
+        const newPointsArr = [];
             points.map(item => (
-                maps.current.geocode(`${town} ${item}`)
+                maps.current.geocode(`${town} ${item.address}`)
                     .then(result => newPointsArr.push(
                         result.geoObjects.get(0).geometry.getCoordinates()
                     ))
-            ));
-
-            setPointsCoord(newPointsArr);
-        }
+            ));    
+        setPointsCoord(newPointsArr);
         //eslint-disable-next-line
     }, [points]);
+
+    useEffect(() => {
+        if (town) {
+            if(choosenPoint) {      
+                maps.current.geocode(`${town} ${choosenPoint}`)
+                    .then(result => setCenterCoord(
+                        result.geoObjects.get(0).geometry.getCoordinates()
+                    ));
+                setZoom(15);
+            } else {
+                maps.current.geocode(town)
+                .then(result => setCenterCoord(
+                    result.geoObjects.get(0).geometry.getCoordinates()
+                ));
+                setZoom(defaultZoom);
+            }
+        }
+        //eslint-disable-next-line
+    }, [choosenPoint]);
 
     const mapState = {
         center: centerCoord,
@@ -52,10 +72,7 @@ function LocationMap({town, point, points}) {
     return (
         <div className="map">
             <YMaps
-                query={{
-                    ns: "use-load-option",
-                    apikey: "8c90fd8a-c183-4c74-8251-ef9e96797de6"
-                }}>
+                query={ymapsQuery}>
                 <p className="map__heading">Выбрать на карте</p>
                 <Map 
                     instanceRef={maps}
@@ -65,7 +82,8 @@ function LocationMap({town, point, points}) {
                     modules={[
                         "geocode", 
                         "templateLayoutFactory", 
-                        "layout.ImageWithContent"
+                        "layout.ImageWithContent", 
+                        "geolocation"
                     ]}
                     onLoad={(ymaps) => maps.current = ymaps}
                 >

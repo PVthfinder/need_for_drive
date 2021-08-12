@@ -5,18 +5,18 @@ import Button from "../layouts/Button";
 
 import "./OrderSummary.scss";
 
-function OrderSummary({town, pointValue, activeBtn, activeCar}) {
+function OrderSummary({town, point, activeBtn, activeCar}) {
     return (
         <div className="order_content__summary">
             <h2 className="order_content__summary_heading">Ваш заказ</h2>
 
             <div 
                 className="order_content__summary_item"
-                style={town && pointValue ? {display: "flex"} : null}
+                style={town && point ? {display: "flex"} : null}
             >
                 <span>Пункт выдачи</span>
                 <span className="dots_border"></span>
-                <span className="item_value">{`${town}, ${pointValue}`}</span>
+                <span className="item_value">{`${town}, ${point}`}</span>
             </div>
             
             <div 

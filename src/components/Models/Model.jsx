@@ -1,15 +1,20 @@
 import React from "react";
+import classNames from 'classnames';
 
 function Model({model, activeCar, setActiveCar}) {
     const {id, name, priceMin, priceMax, thumbnail} = model;
 
     const active = activeCar ? activeCar.id === id ?? false : false;
 
+    const carCardClasses = classNames(
+        "car_card", 
+        {[`active`]: active}
+    );
+
     return (
         <div 
-            className="car_card"
+            className={carCardClasses}
             onClick={() => setActiveCar(model)}
-            style={active ? {outline: "1px solid #0EC261"} : null}
         >
             <div className="car_card__name-price">
                 <span className="car_card__name">{name}</span>
