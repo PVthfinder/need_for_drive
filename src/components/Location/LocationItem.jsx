@@ -4,6 +4,7 @@ import classNames from 'classnames';
 function LocationItem({
     inputValue, 
     setInputValue, 
+    setChoosen,
     selectorArr, 
     label, 
     placeholder
@@ -11,7 +12,8 @@ function LocationItem({
     const [activeInput, setActiveInput] = useState(false);
 
     const choiseHandler = (item) => {
-        setInputValue(item);
+        setInputValue(item.name);
+        setChoosen(item);
         setActiveInput(false);
     }
 
@@ -45,9 +47,9 @@ function LocationItem({
                 >
                     {selectorArr && selectorArr.map(item => (
                         <li 
-                            key={item}
+                            key={item.id}
                             onClick={() => choiseHandler(item)}
-                        >{item}</li>
+                        >{item.name}</li>
                     ))}
                 </ul>
 

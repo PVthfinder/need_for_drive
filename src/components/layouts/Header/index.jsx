@@ -8,7 +8,7 @@ import iconLocation from "../../../assets/images/location_icon.svg";
 import "./Header.scss";
 
 function Header() {
-    const {order} = useContext(AppContext);
+    const {choosenTown} = useContext(AppContext);
 
     return (
         <header className="page_header">
@@ -20,9 +20,9 @@ function Header() {
                 <div 
                     type="text" 
                     className="locality"
-                    style={{width: `${order.town.length * 8}px`}}
+                    style={choosenTown && {width: `${choosenTown.name.length * 8}px`}}
                 >
-                    {order.town}
+                    {choosenTown && choosenTown.name}
                 </div>
             </div>
         </header>

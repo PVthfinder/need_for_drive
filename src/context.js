@@ -3,19 +3,25 @@ import { createContext, useReducer } from "react";
 
 import reducer from "./reducer";
 
+import {defaultTownCoord, defaultZoom} from "./assets/db";
+
 export const AppContext = createContext();
 
 const initialState = {
     activeSlide: 0,
     openMenu: false,
+    townValue: "",
+    pointValue: "",
     order: {
-        town: "",
-        point: "",
+        point: null,
     },
+    towns: [],
     filteredTowns: [],
+    points: [],
     filteredPoints: [],
-    mapZoom: 3,
-    mapCenterCoord: [64.010196, 98.911043],
+    choosenTown: null,
+    mapZoom: defaultZoom,
+    mapCenterCoord: defaultTownCoord,
     mapPointsCoord: [],
     activeBtn: false,
     cars: [],
@@ -53,24 +59,36 @@ export const ContextProvider = ({children}) => {
         dispatch({type: 'SET_POINT_VALUE', payload: pointValue});
     }
 
-    value.setFilteredTowns = (townValue, townsArr) => {
-        dispatch({type: 'SET_FILTERED_TOWNS', payload: {townValue, townsArr}});
+    value.setTowns = (data) => {
+        dispatch({type: 'SET_TOWNS', payload: data});
     }
 
-    value.setFilteredPoints = (pointValue, pointsArr) => {
-        dispatch({type: 'SET_FILTERED_POINTS', payload: {pointValue, pointsArr}});
+    value.setFilteredTowns = (townValue) => {
+        dispatch({type: 'SET_FILTERED_TOWNS', payload: townValue});
     }
 
-    value.setMapZoom = (zoomValue) => {
-        dispatch({type: 'SET_MAP_ZOOM', payload: zoomValue});
+    value.setPoints = (data) => {
+        dispatch({type: 'SET_POINTS', payload: data});
     }
 
-    value.setMapCenter = (coords) => {
-        dispatch({type: 'SET_MAP_CENTER', payload: coords});
+    value.setChoosenTown = (choosenTown) => {
+        dispatch({type: 'SET_CHOOSEN_TOWN', payload: choosenTown});
+    }
+
+    value.setFilteredPoints = (pointValue) => {
+        dispatch({type: 'SET_FILTERED_POINTS', payload: pointValue});
+    }
+
+    value.setChoosenPoint = (choosenPoint) => {
+        dispatch({type: 'SET_CHOOSEN_POINT', payload: choosenPoint});
+    }
+
+    value.setMapCenter = (coords = defaultTownCoord, zoom = defaultZoom) => {
+        dispatch({type: 'SET_MAP_CENTER', payload: {coords, zoom}});
     }
 
     value.setMapPointsCoord = (pointsArr) => {
-        dispatch({type: 'SET_MAP_POINTS', payload: pointsArr});
+        dispatch({type: 'SET_MAP_POINTS_COORD', payload: pointsArr});
     }
 
     // value.setActiveBtn = (isBtnActive) => {

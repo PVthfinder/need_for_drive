@@ -34,7 +34,7 @@
         color: $darkGreyColor;
         justify-content: space-between;
         align-items: flex-end;
-        display: none;
+        display: flex;
 
         span{
             &:first-child {

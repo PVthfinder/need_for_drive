@@ -5,57 +5,71 @@ import { AppContext } from '../../context';
 import LocationItem from "./LocationItem";
 import LocationMap from "./LocationMap";
 
-import {locations} from "../../assets/db";
+import { getTowns, getPoints } from "../../api";
 
 import "./Location.scss";
 
 function Location() {
     const {
-        order,
+        townValue,
+        pointValue,
         setTownValue,
         setPointValue,
         filteredTowns, 
-        setFilteredTowns, 
+        setTowns, 
+        setFilteredTowns,
         filteredPoints, 
-        setFilteredPoints
+        setPoints,
+        setFilteredPoints,
+        setChoosenTown,
+        setChoosenPoint
     } = useContext(AppContext);
 
     useEffect(() => {
-        locations && setFilteredTowns(order.town, Object.keys(locations));
-        locations[order.town] && setFilteredPoints(order.point, locations[order.town]);
+        getTowns().then(data => setTowns(data.data));
         //eslint-disable-next-line
-    }, [order.town, order.point]);
+    }, []);
 
     useEffect(() => {
-        if (order.town.length === 0) {
-            setPointValue('');
+        setFilteredTowns(townValue);
+        //eslint-disable-next-line
+    }, [townValue]);
+
+    useEffect(() => {
+        if (filteredTowns.length === 1) { 
+            getPoints(filteredTowns[0].id).then(data => setPoints(data.data, filteredTowns[0]));
         }
         //eslint-disable-next-line
-    }, [order.town]);
+    }, [filteredTowns]);
+
+    useEffect(() => {
+        setFilteredPoints(pointValue);
+        //eslint-disable-next-line
+    }, [pointValue]);
 
     return (
         <div className="order_content__location">
             <div className="location_inputs">
                 <LocationItem
-                    inputValue={order.town}
+                    inputValue={townValue}
                     setInputValue={setTownValue}
+                    setChoosen={setChoosenTown}
                     selectorArr={filteredTowns}
                     label="Город"
                     placeholder="город"
                 />
 
                 <LocationItem
-                    inputValue={order.point}
+                    inputValue={pointValue}
                     setInputValue={setPointValue}
+                    setChoosen={setChoosenPoint}
                     selectorArr={filteredPoints}
                     label="Пункт выдачи"
                     placeholder="пункт"
                 />
             </div>
             
-            <LocationMap 
-                points={locations[order.town]}
-            />
+            <LocationMap />
         </div>
     )
 }

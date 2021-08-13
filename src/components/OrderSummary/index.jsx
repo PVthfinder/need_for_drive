@@ -18,13 +18,13 @@ function OrderSummary() {
         <div className="order_content__summary">
             <h2 className="order_content__summary_heading">Ваш заказ</h2>
 
-            <div 
-                className="order_content__summary_item"
-                style={order.town && order.point ? {display: "flex"} : null}
-            >
+            <div className="order_content__summary_item">
                 <span>Пункт выдачи</span>
                 <span className="dots_border"></span>
-                <span className="item_value">{`${order.town}, ${order.point}`}</span>
+                <span className="item_value">
+                    {order.point && 
+                    `${order.point.cityId.name}, ${order.point.address}`}
+                </span>
             </div>
             
             <div 

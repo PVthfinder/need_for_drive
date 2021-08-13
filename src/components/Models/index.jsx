@@ -37,12 +37,12 @@ function Models() {
                     <input 
                         name="type" 
                         type="radio"
-                        id="radio_all"
+                        id="filter_all"
                         value="all"
                         onChange={(evt) => setFilteredCars(evt.target.value)} 
                         checked={category === "all"}
                     />
-                    <label htmlFor="radio_all">All</label>
+                    <label htmlFor="filter_all">All</label>
                 </div>
                 {
                     carsCategories.length && carsCategories.map(item => (
@@ -53,12 +53,12 @@ function Models() {
                             <input 
                                 name="type" 
                                 type="radio"
-                                id={`radio_${item.name}`}
+                                id={`filter_${item.name}`}
                                 value={item.name}
                                 onChange={(evt) => setFilteredCars(evt.target.value)} 
                                 checked={category === item.name}
                             />
-                            <label htmlFor={`radio_${item.name}`}>{item.name}</label>
+                            <label htmlFor={`filter_${item.name}`}>{item.name}</label>
                         </div>
                     ))
                 }

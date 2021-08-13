@@ -5,52 +5,67 @@ import { AppContext } from '../../context';
 
 import mark from "../../assets/images/map_point.svg";
 
-function LocationMap({points}) {
+function LocationMap() {
     const {
+        choosenTown,
         order,
         mapZoom,
-        setMapZoom,
         mapCenterCoord,
         setMapCenter,
+        points,
         mapPointsCoord,
         setMapPointsCoord
     } = useContext(AppContext);
 
     const maps = useRef();
 
+    const ymapsQuery = {
+        ns: "use-load-option",
+        apikey: "8c90fd8a-c183-4c74-8251-ef9e96797de6"
+    };
+
     useEffect(() => {
         if (maps.current) {
-            if (!order.point) {
-                maps.current.geocode(order.town)
-                .then(result => setMapCenter(
-                    result.geoObjects.get(0).geometry.getCoordinates()
-                ));
-                setMapZoom(11);
+            if (!choosenTown) {
+                setMapCenter();
             } else {
-                maps.current.geocode(`${order.town} ${order.point}`)
+                maps.current.geocode(choosenTown.name)
                 .then(result => setMapCenter(
                     result.geoObjects.get(0).geometry.getCoordinates()
                 ));
-                setMapZoom(15);
             }
         }
         //eslint-disable-next-line
-    }, [order.town, order.point]);
+    }, [choosenTown]);
 
     useEffect(() => {
-        if(points && points.length) {      
-            const newPointsArr = [];
-            points.map(item => (
-                maps.current.geocode(`${order.town} ${item}`)
-                    .then(result => newPointsArr.push(
-                        result.geoObjects.get(0).geometry.getCoordinates()
-                    ))
-            ));
-
-            setMapPointsCoord(newPointsArr);
-        }
+        const newPointsArr = [];
+        points.map(item => 
+            maps.current.geocode(`${item.cityId.name} ${item.address}`)
+                .then(result => newPointsArr.push(
+                    result.geoObjects.get(0).geometry.getCoordinates()
+                ))
+        );    
+        setMapPointsCoord(newPointsArr);
         //eslint-disable-next-line
     }, [points]);
+
+    useEffect(() => {
+        if (choosenTown) {
+            if(order.point) {      
+                maps.current.geocode(`${order.point.cityId.name} ${order.point.address}`)
+                    .then(result => setMapCenter(
+                        result.geoObjects.get(0).geometry.getCoordinates(), 15
+                    ));
+            } else {
+                maps.current.geocode(choosenTown.name)
+                    .then(result => setMapCenter(
+                        result.geoObjects.get(0).geometry.getCoordinates()
+                    ));
+            }
+        }
+        //eslint-disable-next-line
+    }, [order.point]);
 
     const mapState = {
         center: mapCenterCoord,
@@ -60,10 +75,7 @@ function LocationMap({points}) {
     return (
         <div className="map">
             <YMaps
-                query={{
-                    ns: "use-load-option",
-                    apikey: "8c90fd8a-c183-4c74-8251-ef9e96797de6"
-                }}>
+                query={ymapsQuery}>
                 <p className="map__heading">Выбрать на карте</p>
                 <Map 
                     instanceRef={maps}
@@ -77,7 +89,7 @@ function LocationMap({points}) {
                     ]}
                     onLoad={(ymaps) => maps.current = ymaps}
                 >
-                    {mapPointsCoord.map(
+                    {mapPointsCoord && mapPointsCoord.map(
                         point => 
                             <Placemark 
                                 key={point} 

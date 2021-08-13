@@ -1,4 +1,9 @@
 function reducer (state, {type, payload}) {
+    const filter = (str = '', arr=[]) => {
+        return arr.filter(
+            item => item.name.toLowerCase().includes(str.toLowerCase())
+        );
+    }
 
     switch(type) {
         case 'SET_ON_NEXT_SLIDE':
@@ -22,55 +27,89 @@ function reducer (state, {type, payload}) {
         case 'SET_TOWN_VALUE':
             return {
                 ...state,
-                order: {
-                    ...state.order,
-                    town: payload
-                }
+                townValue: payload
             }
             
         case 'SET_POINT_VALUE':
             return {
                 ...state,
-                order: {
-                    ...state.order,
-                    point: payload
-                },
+                pointValue: payload,
                 activeBtn: payload
             }
             
-        case 'SET_FILTERED_TOWNS':
-            const newFilteredTowns = payload.townsArr.filter(
-                item => item.toLowerCase()
-                    .includes(payload.townValue.toLowerCase())
-            );
+        case 'SET_TOWNS':
             return {
                 ...state,
-                filteredTowns: newFilteredTowns
+                towns: payload,
+                filteredTowns: payload
+            };
+            
+        case 'SET_FILTERED_TOWNS':
+            const newFilteredTowns = filter(payload, state.towns);
+            let newTownsState = {};
+            if (state.townValue.length === 0) {
+                newTownsState = {
+                    choosenTown: null,
+                    pointValue: "",
+                    order: {
+                        point: null
+                    },
+                    points: [],
+                    filteredPoints: []
+                }
+            }
+            return {
+                ...state,
+                filteredTowns: newFilteredTowns,
+                ...newTownsState
+        };
+        
+        case 'SET_POINTS':
+            return {
+                ...state,
+                points: payload,
+                filteredPoints: payload
+            };
+        
+        case 'SET_CHOOSEN_TOWN':
+            return {
+                ...state,
+                choosenTown: payload
             };
             
         case 'SET_FILTERED_POINTS':
-            const newFilteredPoints = payload.pointsArr.filter(
-                item => item.toLowerCase()
-                    .includes(payload.pointValue.toLowerCase())
-            );
-            return {
-                ...state,
-                filteredPoints: newFilteredPoints
-            };
-            
-        case 'SET_MAP_ZOOM':
-            return {
-                ...state,
-                mapZoom: payload
+            const newFilteredPoints = filter(payload, state.points);
+            let newPointsState = {};
+            if (state.pointValue.length === 0) {
+                newPointsState = {
+                    order: {
+                        point: null
+                    },
+                    filteredPoints: []
+                }
             }
+            return {
+                ...state,
+                filteredPoints: newFilteredPoints,
+                ...newPointsState
+            };
+        
+        case 'SET_CHOOSEN_POINT':
+            return {
+                ...state,
+                order: {
+                    point: payload,
+                }
+            };
             
         case 'SET_MAP_CENTER':
             return {
                 ...state,
-                mapCenterCoord: payload
+                mapZoom: payload.zoom,
+                mapCenterCoord: payload.coords,
             }
             
-        case 'SET_MAP_POINTS':
+        case 'SET_MAP_POINTS_COORD':
             return {
                 ...state,
                 mapPointsCoord: payload
