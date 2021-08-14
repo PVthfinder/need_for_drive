@@ -1,0 +1,42 @@
+@import "../../../_variables.scss";
+
+.breadscrumbs {
+    padding: 8px 64px 7px;
+    display: flex;
+    border-top: 1px solid $lightkGreyColor;
+    border-bottom: 1px solid $lightkGreyColor;
+
+    a {
+        font-family: $fontBold;
+        font-size: $fontSizeSimpleText;
+        line-height: $lineHeightSimpleText;
+        color: $darkGreyColor;
+        margin-right: 38px;
+        position: relative;
+
+        &:not(:first-child)::before {
+            content: url("../../../assets/images/breadscrumbs_arrow.svg");
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            right: calc(100% + 16px);
+        }
+
+        &:hover {
+            color: $mainAccentColor;
+        }
+    }
+}
+
+@media (max-width: $desctopSize) {
+  .breadscrumbs {
+    padding: 8px 32px 7px;
+  }
+}
+
+@media (max-width: $tabletSize) {
+    .breadscrumbs {
+      padding: 8px 16px;
+        flex-wrap: wrap;
+    }
+}
