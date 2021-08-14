@@ -1,23 +1,19 @@
-import React from "react";
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-import Slider from "./components/Slider/index.jsx";
-import Menu from "./components/Menu/index.jsx";
-import Home from "./components/pages/Home.jsx";
-import Header from "./components/layouts/Header.jsx";
-import Footer from "./components/layouts/Footer.jsx";
-
-import {images} from './assets/db';
+import Menu from "./components/Menu";
+import Home from "./components/pages/Home";
+import Order from "./components/pages/Order";
 
 function App() {
   return (
     <div className="app">
       <Menu/>
-      <div className="home_page">
-        <Header/>
-        <Home/>
-        <Footer/>
-      </div>
-      <Slider slides={images}/>
+      <Router basename='need_for_drive'>
+        <Switch>              
+          <Route exact path="/" component={Home}/>
+          <Route path="/order" component={Order}/>
+        </Switch>
+      </Router>
     </div>
   );
 }

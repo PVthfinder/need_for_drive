@@ -1,7 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
+import {Link} from 'react-router-dom';
 
-import Button from '../layouts/Button';
+import Button from '../layouts/Button/';
 
 function Slide({prevImgIndex, nextImgIndex, slide}) {
     return (
@@ -21,11 +22,14 @@ function Slide({prevImgIndex, nextImgIndex, slide}) {
         >
             <h2 className="slide__heading">{slide.heading}</h2>
             <p className="slide__description">{slide.desc}</p>
-            <Button 
-                title="Подробнее" 
-                color={slide.color} 
-                location="btn--slider"
-            />
+            <Link to="/order">
+                <Button 
+                    title="Подробнее" 
+                    color={slide.color} 
+                    location="btn--slider"
+                    activeBtn={true}
+                />
+            </Link>
         </div>
     )
 }
