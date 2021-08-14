@@ -39,9 +39,9 @@ function LocationItem({inputValue, setInputValue, selectorArr, label, placeholde
                 >
                     {selectorArr && selectorArr.map(item => (
                         <li 
-                            key={item}
-                            onClick={() => choiseHandler(item)}
-                        >{item}</li>
+                            key={item.name ?? item.address}
+                            onClick={() => choiseHandler(item.name ?? item.address)}
+                        >{item.name ?? item.address}</li>
                     ))}
                 </ul>
 
