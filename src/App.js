@@ -12,7 +12,9 @@ function App() {
         <ContextProvider>
           <Switch>              
             <Route exact path="/" component={Home}/>
-            <Route path="/order" component={Order}/>
+            <Route path="/order/location" component={Order}/>
+            <Route path="/order/models" component={Order}/>
+            <Route path="/order/options" component={Order}/>
           </Switch>
         </ContextProvider>
       </Router>

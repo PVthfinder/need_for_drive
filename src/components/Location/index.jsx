@@ -22,7 +22,8 @@ function Location() {
         setPoints,
         setFilteredPoints,
         setChoosenTown,
-        setChoosenPoint
+        setChoosenPoint,
+        setActiveBtn
     } = useContext(AppContext);
 
     useEffect(() => {
@@ -64,6 +65,7 @@ function Location() {
                     setInputValue={setPointValue}
                     setChoosen={setChoosenPoint}
                     selectorArr={filteredPoints}
+                    setActiveBtn={setActiveBtn}
                     label="Пункт выдачи"
                     placeholder="пункт"
                 />

@@ -9,6 +9,7 @@ import Breadcrumbs from '../../layouts/Breadcrumbs';
 import OrderSummary from '../../OrderSummary';
 import Location from '../../Location';
 import Models from '../../Models';
+import Options from '../../Options';
 
 import "./Order.scss";
 
@@ -21,6 +22,40 @@ function Order() {
         if (evt.target.offsetHeight + evt.target.scrollTop === evt.target.scrollHeight) {
             setPaginationPage();
           }
+    }
+
+    const btnOptions = () => {
+        if (pathname.includes("location")) {
+            return {
+                title: "Выбрать модель",
+                link: "models"
+            };
+        } else if (pathname.includes("model")) {
+            return {
+                title: "Дополнительно",
+                link: "options"
+            };
+        } else if (pathname.includes("options")) {
+            return {
+                title: "Итого",
+                link: "summary"
+            };
+        } else if (pathname.includes("summary")) {
+            return {
+                title: "Заказать",
+                link: "#!"
+            };
+        }
+    }
+
+    const componentSelector = () => {
+        if (pathname.includes('location')) {
+            return <Location />;
+        } else if (pathname.includes('model')) {
+            return <Models />;
+        } else if (pathname.includes('options')) {
+            return <Options />;
+        }
     }
 
     return (
@@ -36,15 +71,11 @@ function Order() {
                         className="order_content__main"  
                         onScroll={(evt) => onScroll(evt)}
                     >
-                        {pathname.includes('location') &&
-                            <Location />
-                        }
-                        
-                        {pathname.includes('model') &&
-                            <Models />
-                        }
+                        {componentSelector()}
                     </div>
-                    <OrderSummary />
+                    <OrderSummary 
+                        btnOptions={btnOptions()}
+                    />
                 </div>
             </div>
         </>

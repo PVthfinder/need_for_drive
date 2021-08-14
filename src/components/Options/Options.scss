@@ -1,0 +1,40 @@
+@import "../../variables";
+
+.order_content {
+    &__options {
+        font-family: $fontLight;
+        font-size: $fontSizeSimpleText;
+        line-height: $lineHeightSimpleText;
+        color: $darkGreyColor;
+
+        .option {
+            &__title {
+                color: $mainBlackColor;
+                margin-bottom: 16px;
+            }
+
+            &__content {
+                display: flex;
+                flex-direction: column;
+            }
+
+            &:not(:last-child) {
+                margin-bottom: 32px;
+            }
+
+            &__item {
+                :not(:last-child) {
+                    margin-bottom: 8px;
+                }
+            }
+        }
+    }
+}
+
+.date_filter {
+    &__item {
+        &:not(:last-child) {
+            margin-bottom: 8px;
+        }
+    }
+}

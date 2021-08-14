@@ -8,7 +8,7 @@ import mark from "../../assets/images/map_point.svg";
 function LocationMap() {
     const {
         choosenTown,
-        order,
+        choosenPoint,
         mapZoom,
         mapCenterCoord,
         setMapCenter,
@@ -52,8 +52,8 @@ function LocationMap() {
 
     useEffect(() => {
         if (choosenTown) {
-            if(order.point) {      
-                maps.current.geocode(`${order.point.cityId.name} ${order.point.address}`)
+            if(choosenPoint) {      
+                maps.current.geocode(`${choosenPoint.cityId.name} ${choosenPoint.address}`)
                     .then(result => setMapCenter(
                         result.geoObjects.get(0).geometry.getCoordinates(), 15
                     ));
@@ -65,7 +65,7 @@ function LocationMap() {
             }
         }
         //eslint-disable-next-line
-    }, [order.point]);
+    }, [choosenPoint]);
 
     const mapState = {
         center: mapCenterCoord,

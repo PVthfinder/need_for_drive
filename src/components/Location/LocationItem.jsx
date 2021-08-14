@@ -6,6 +6,7 @@ function LocationItem({
     setInputValue, 
     setChoosen,
     selectorArr, 
+    setActiveBtn,
     label, 
     placeholder
 }) {
@@ -15,6 +16,7 @@ function LocationItem({
         setInputValue(item.name);
         setChoosen(item);
         setActiveInput(false);
+        setActiveBtn && setActiveBtn(true);
     }
 
     const selectorClasses = classNames(

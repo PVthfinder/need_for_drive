@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import "./Button.scss";
 
-function Button({title, color, location, activeBtn}) {
+function Button({title, color, location, isActiveBtn}) {
     const btnClasses = classNames(
         "btn", 
         location, 
@@ -15,7 +15,7 @@ function Button({title, color, location, activeBtn}) {
             type="button" 
             value={title} 
             className={btnClasses}
-            disabled={!activeBtn}
+            disabled={!isActiveBtn}
         />
     )
 }

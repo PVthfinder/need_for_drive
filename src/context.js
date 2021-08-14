@@ -10,26 +10,26 @@ export const AppContext = createContext();
 const initialState = {
     activeSlide: 0,
     openMenu: false,
+    isActiveBtn: false,
     townValue: "",
     pointValue: "",
-    order: {
-        point: null,
-    },
+    order: null,
     towns: [],
     filteredTowns: [],
     points: [],
     filteredPoints: [],
     choosenTown: null,
+    choosenPoint: null,
     mapZoom: defaultZoom,
     mapCenterCoord: defaultTownCoord,
     mapPointsCoord: [],
-    activeBtn: false,
     cars: [],
     filteredCars: [],
     carsCategories: [],
-    category: "all",
-    activeCar: null,
+    carCategory: "all",
+    choosenCar: null,
     paginationPage: 0,
+    carColor: "all"
 };
 
 export const ContextProvider = ({children}) => {
@@ -49,6 +49,10 @@ export const ContextProvider = ({children}) => {
 
     value.setOpenMenu = () => {
         dispatch({type: 'SET_OPEN_MENU'});
+    }
+
+    value.setActiveBtn = (isBtnActive) => {
+        dispatch({type: 'SET_ACTIVE_BTN', payload: isBtnActive});
     }
 
     value.setTownValue = (townValue) => {
@@ -91,10 +95,6 @@ export const ContextProvider = ({children}) => {
         dispatch({type: 'SET_MAP_POINTS_COORD', payload: pointsArr});
     }
 
-    // value.setActiveBtn = (isBtnActive) => {
-    //     dispatch({type: 'SET_ACTIVE_BTN', payload: isBtnActive});
-    // }
-
     value.setCars = (data) => {
         dispatch({type: 'SET_CARS', payload: data});
     }
@@ -111,8 +111,12 @@ export const ContextProvider = ({children}) => {
         dispatch({type: 'SET_CARS_CATEGORIES', payload: data});
     }
 
-    value.setActiveCar = (car) => {
-        dispatch({type: 'SET_ACTIVE_CAR', payload: car});
+    value.setChoosenCar = (car) => {
+        dispatch({type: 'SET_CHOOSEN_CAR', payload: car});
+    }
+
+    value.setCarColor = (color) => {
+        dispatch({type: 'SET_CAR_COLOR', payload: color});
     }
 
     // value.setCompetitions = (data, search) => {

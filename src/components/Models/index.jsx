@@ -3,6 +3,7 @@ import React, {useContext, useEffect} from "react";
 import { AppContext } from "../../context";
 
 import Model from "./Model";
+import Filter from "../layouts/Filter";
 
 import { getAllCars, getCarsCategories } from "../../api";
 
@@ -15,13 +16,15 @@ function Models() {
         setFilteredCars,
         carsCategories, 
         setCarsCategories,
-        category, 
-        activeCar,
-        paginationPage
+        carCategory, 
+        choosenCar,
+        paginationPage,
+        setActiveBtn
     } = useContext(AppContext);
 
     useEffect(() => {
         getAllCars(paginationPage).then(data => setCars(data.data));
+        setActiveBtn(false);
         //eslint-disable-next-line
     }, [paginationPage]);
 
@@ -32,37 +35,12 @@ function Models() {
 
     return (
         <div className="order_content__models">
-            <div className="radios">
-                <div className="car_category">
-                    <input 
-                        name="type" 
-                        type="radio"
-                        id="filter_all"
-                        value="all"
-                        onChange={(evt) => setFilteredCars(evt.target.value)} 
-                        checked={category === "all"}
-                    />
-                    <label htmlFor="filter_all">All</label>
-                </div>
-                {
-                    carsCategories.length && carsCategories.map(item => (
-                        <div
-                            key={item.id} 
-                            className="car_category"
-                        >
-                            <input 
-                                name="type" 
-                                type="radio"
-                                id={`filter_${item.name}`}
-                                value={item.name}
-                                onChange={(evt) => setFilteredCars(evt.target.value)} 
-                                checked={category === item.name}
-                            />
-                            <label htmlFor={`filter_${item.name}`}>{item.name}</label>
-                        </div>
-                    ))
-                }
-            </div>
+            <Filter 
+                commonTitle="Все модели"
+                filterEntity={carCategory}
+                optionsArr={carsCategories}
+                applyFilter={setFilteredCars}
+            />
                 
             {
                 filteredCars.length ? 
@@ -71,7 +49,7 @@ function Models() {
                         <Model 
                             key={item.id}
                             model={item}
-                            activeCar={activeCar}
+                            choosenCar={choosenCar}
                         />
                     ))}
                 </div> :

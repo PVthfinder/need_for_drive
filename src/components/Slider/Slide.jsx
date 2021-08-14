@@ -27,7 +27,7 @@ function Slide({prevImgIndex, nextImgIndex, slide}) {
                     title="Подробнее" 
                     color={slide.color} 
                     location="btn--slider"
-                    activeBtn={true}
+                    isActiveBtn={true}
                 />
             </Link>
         </div>

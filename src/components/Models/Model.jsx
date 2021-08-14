@@ -6,20 +6,29 @@ import { AppContext } from "../../context";
 function Model({model}) {
     const {id, name, priceMin, priceMax, thumbnail} = model;
 
-    const {activeCar, setActiveCar} =useContext(AppContext);
+    const {
+        choosenCar, 
+        setChoosenCar,
+        setActiveBtn
+    } =useContext(AppContext);
 
-    const active = activeCar ? activeCar.id === id ?? false : false;
+    const active = choosenCar ? choosenCar.id === id ?? false : false;
 
     const carCardClasses = classNames(
         "car_card", 
         {[`active`]: active}
     );
 
+    const choiseHandler = (model) => {
+        setChoosenCar(model);
+        setActiveBtn(true);
+    }
+
 
     return (
         <div 
             className={carCardClasses}
-            onClick={() => setActiveCar(model)}
+            onClick={() => choiseHandler(model)}
         >
             <div className="car_card__name-price">
                 <span className="car_card__name">{name}</span>

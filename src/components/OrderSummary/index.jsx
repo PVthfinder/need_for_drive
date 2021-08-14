@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 import {Link} from 'react-router-dom';
 
 import { AppContext } from '../../context';
@@ -7,12 +7,13 @@ import Button from "../layouts/Button";
 
 import "./OrderSummary.scss";
 
-function OrderSummary() {
-    const {order, activeBtn, activeCar} = useContext(AppContext);
-
-    // useEffect(() => {
-    //     setActiveBtn(order.town.length && order.point.length);
-    // }, [order.town, order.point]);
+function OrderSummary({btnOptions}) {
+    const {
+        choosenTown,
+        choosenPoint,
+        isActiveBtn, 
+        choosenCar
+    } = useContext(AppContext);
 
     return (
         <div className="order_content__summary">
@@ -22,32 +23,36 @@ function OrderSummary() {
                 <span>Пункт выдачи</span>
                 <span className="dots_border"></span>
                 <span className="item_value">
-                    {order.point && 
-                    `${order.point.cityId.name}, ${order.point.address}`}
+                    {
+                        choosenPoint && 
+                        `${choosenTown.name}, ${choosenPoint.address}`
+                    }
                 </span>
             </div>
             
             <div 
                 className="order_content__summary_item"
-                style={activeCar ? {display: "flex"} : null}
+                style={choosenCar ? {display: "flex"} : null}
             >
                 <span>Модель</span>
                 <span className="dots_border"></span>
-                <span className="item_value">{activeCar ? activeCar.name : null}</span>
+                <span className="item_value">{choosenCar ? choosenCar.name : null}</span>
             </div>
 
             <p className="order_content__total_price">
-                {`Цена: от 
-                ${activeCar ? activeCar.priceMin.toLocaleString() : "---"} до 
-                ${activeCar ? activeCar.priceMax.toLocaleString() : "---"} `}
+                {
+                    `Цена: от 
+                    ${choosenCar ? choosenCar.priceMin.toLocaleString() : "---"} до 
+                    ${choosenCar ? choosenCar.priceMax.toLocaleString() : "---"} `
+                }
                 &#8381;
             </p>
 
-            <Link to="/order/model">
+            <Link to={`/order/${btnOptions.link}`}>
                 <Button 
-                    title="Выбрать модель" 
+                    title={btnOptions.title} 
                     location="btn--order"
-                    activeBtn={activeBtn}
+                    isActiveBtn={isActiveBtn}
                 />
             </Link>
         </div>

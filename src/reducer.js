@@ -24,6 +24,12 @@ function reducer (state, {type, payload}) {
                 openMenu: !state.openMenu
             }
             
+        case 'SET_ACTIVE_BTN':
+            return {
+                ...state,
+                isActiveBtn: payload
+            }
+            
         case 'SET_TOWN_VALUE':
             return {
                 ...state,
@@ -33,8 +39,7 @@ function reducer (state, {type, payload}) {
         case 'SET_POINT_VALUE':
             return {
                 ...state,
-                pointValue: payload,
-                activeBtn: payload
+                pointValue: payload
             }
             
         case 'SET_TOWNS':
@@ -74,7 +79,10 @@ function reducer (state, {type, payload}) {
         case 'SET_CHOOSEN_TOWN':
             return {
                 ...state,
-                choosenTown: payload
+                choosenTown: payload,
+                order: {
+                    cityId: payload.id
+                }
             };
             
         case 'SET_FILTERED_POINTS':
@@ -85,7 +93,8 @@ function reducer (state, {type, payload}) {
                     order: {
                         point: null
                     },
-                    filteredPoints: []
+                    filteredPoints: [],
+                    isActiveBtn: false
                 }
             }
             return {
@@ -97,8 +106,9 @@ function reducer (state, {type, payload}) {
         case 'SET_CHOOSEN_POINT':
             return {
                 ...state,
+                choosenPoint: payload,
                 order: {
-                    point: payload,
+                    pointId: payload,
                 }
             };
             
@@ -153,14 +163,21 @@ function reducer (state, {type, payload}) {
             };
         }
 
-        case 'SET_ACTIVE_CAR': {
+        case 'SET_CHOOSEN_CAR': {
             return {
                 ...state,
-                activeCar: payload,
+                choosenCar: payload,
                 order: {
                     ...state.order,
-                    car: payload
+                    carId: payload.id
                 }
+            };
+        }
+
+        case 'SET_CAR_COLOR': {
+            return {
+                ...state,
+                carColor: payload
             };
         }
 
