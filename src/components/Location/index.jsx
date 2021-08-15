@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from "react";
 
 import { AppContext } from '../../context';
 
-import LocationItem from "./LocationItem";
+import InputField from "../layouts/InputField";
 import LocationMap from "./LocationMap";
 
 import { getTowns, getPoints } from "../../api";
@@ -51,23 +51,23 @@ function Location() {
     return (
         <div className="order_content__location">
             <div className="location_inputs">
-                <LocationItem
+                <InputField
                     inputValue={townValue}
                     setInputValue={setTownValue}
                     setChoosen={setChoosenTown}
                     selectorArr={filteredTowns}
                     label="Город"
-                    placeholder="город"
+                    placeholder="Начните вводить город..."
                 />
 
-                <LocationItem
+                <InputField
                     inputValue={pointValue}
                     setInputValue={setPointValue}
                     setChoosen={setChoosenPoint}
                     selectorArr={filteredPoints}
                     setActiveBtn={setActiveBtn}
                     label="Пункт выдачи"
-                    placeholder="пункт"
+                    placeholder="Начните вводить пункт..."
                 />
             </div>
             

@@ -6,6 +6,9 @@
         font-size: $fontSizeSimpleText;
         line-height: $lineHeightSimpleText;
         color: $darkGreyColor;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
 
         .option {
             &__title {
@@ -23,8 +26,55 @@
             }
 
             &__item {
-                :not(:last-child) {
+                margin-left: 20px;
+
+                &:not(:last-child) {
                     margin-bottom: 8px;
+                }
+
+                input[type="checkbox"] {
+                    display: none;
+        
+                    &:checked + label {
+                        color: $mainBlackColor;
+
+                        &::before {
+                            border: 1px solid $mainAccentColor;
+                        }
+
+                        &::after {
+                            background: url("../../assets/images/check_icon.svg") 2px 0 no-repeat;
+                        }
+                    }
+                }
+                
+                input[type="checkbox"] + label {
+                    position: relative;
+                    cursor: pointer;
+        
+                    &::before,
+                    &::after {
+                        content: "";
+                        width: 12px;
+                        height: 12px;
+                        position: absolute;
+                        top: 50%;
+                        left: 0;
+                        transform: translate(-100%, -50%);
+                        transition: border 0.1s ease-in;
+                    }
+        
+                    &::before {
+                        border: 1px solid $darkGreyColor;
+                        box-sizing: border-box;
+                        left: -8px;
+                    }
+        
+                    &::after {
+                        width: 20px;
+                        left: 0;
+                        z-index: 1;
+                    }
                 }
             }
         }
@@ -32,9 +82,5 @@
 }
 
 .date_filter {
-    &__item {
-        &:not(:last-child) {
-            margin-bottom: 8px;
-        }
-    }
+    align-items: flex-end;
 }

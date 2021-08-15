@@ -3,24 +3,71 @@ import React, {useContext, useEffect} from "react";
 import { AppContext } from "../../context";
 
 import Filter from "../layouts/Filter";
+import InputField from "../layouts/InputField";
+
+import { getRates } from "../../api";
+
+import {additionalOptionsArr} from "../../assets/db";
 
 import "./Options.scss";
 
 function Options() {
     const {
-        activeCar,
+        choosenCar,
+        order,
         carColor,
         setCarColor,
-        setActiveBtn
+        dateFrom,
+        setDateFrom,
+        dateTo,
+        setDateTo,
+        setRentDuration,
+        setActiveBtn,
+        rates,
+        setRates,
+        choosenRate,
+        setChoosenRate,
+        price,
+        setPrice,
+        additionalOptions,
+        setAdditionalOption,
+        setPriceWithAdditionalOption,
+        isValidPrice,
+        setValidPrice
     } =useContext(AppContext);
 
-    const date = {};
+    const applyAdditionalOption = (option) => {
+        setAdditionalOption(option.value);
+        setPriceWithAdditionalOption(option);
+    }
 
     useEffect(() => {
-        if (!date.from) {
+        if (!order.price) {
             setActiveBtn(false);
         }
+        getRates().then(data => setRates(data.data));
+        //eslint-disable-next-line
     }, []);
+
+    useEffect(() => {
+        setRentDuration();
+        //eslint-disable-next-line
+    }, [dateFrom, dateTo]);
+
+    useEffect(() => {
+        setPrice();
+        //eslint-disable-next-line
+    }, [dateFrom, dateTo, choosenRate]);
+
+    useEffect(() => {
+        setValidPrice();
+        //eslint-disable-next-line
+    }, [price]);
+
+    useEffect(() => {
+        setActiveBtn(isValidPrice);
+        //eslint-disable-next-line
+    }, [isValidPrice]);
 
     return (
         <div className="order_content__options">
@@ -29,7 +76,7 @@ function Options() {
                 <Filter 
                     commonTitle="Любой"
                     filterEntity={carColor}
-                    // optionsArr={activeCar.colors}
+                    optionsArr={choosenCar.colors}
                     applyFilter={setCarColor}
                 />
             </div>
@@ -37,96 +84,75 @@ function Options() {
             <div className="option">
                 <p className="option__title">Дата аренды</p>
                 <div className="option__content date_filter">
-                    <div className="date_filter__item">
-                        <label className="filter_label" htmlFor="date_from">С</label>
-                        <input 
-                            type="datetime-local" 
-                            id="date_from" 
-                            className="datepicker"
-                            placeholder="Введите дату и время"
-                            // onChange={(event) => setDateFrom(event.target.value)}
-                        />
-                    </div>
-
-                    <div className="date_filter__item">
-                        <label className="filter_label" htmlFor="date_to">По</label>
-                        <input 
-                        type="datetime-local" 
-                        id="date_to" 
-                        className="datepicker"
-                        // onChange={(event) => setDateTo(event.target.value)}
-                        />
-                    </div>
+                    <InputField 
+                        inputValue={dateFrom}
+                        setInputValue={setDateFrom}
+                        setChoosen={setDateFrom}
+                        label="C"
+                        placeholder="Введите дату и время"
+                        changeInputType={true}
+                        date={order.dateFrom}
+                    />
+                    
+                    <InputField 
+                        inputValue={dateTo}
+                        setInputValue={setDateTo}
+                        setChoosen={setDateTo}
+                        label="По"
+                        placeholder="Введите дату и время"
+                        changeInputType={true}
+                        date={order.dateTo}
+                    />
                 </div>
             </div>
             
             <div className="option">
                 <p className="option__title">Тариф</p>
                 <div className="option__content filter">
-                    <div className="filter__item">
-                        <input 
-                            name="type" 
-                            type="radio"
-                            id="filter_minutes"
-                            value="minutes"
-                            // onChange={(evt) => applyFilter(evt.target.value)} 
-                            // checked={filterEntity === "all"}
-                        />
-                        <label htmlFor="filter_minutes">Поминутно, 7 &#8381;/мин</label>
-                    </div>
-
-                    <div className="filter__item">
-                        <input 
-                            name="type" 
-                            type="radio"
-                            id="filter_days"
-                            value="all"
-                            // onChange={(evt) => applyFilter(evt.target.value)} 
-                            // checked={filterEntity === "all"}
-                        />
-                        <label htmlFor="filter_days">На сутки, 1999 &#8381;/сутки</label>
-                    </div>
+                    {
+                        rates.length && 
+                        rates.map(item => (
+                            <div
+                                key={item.id} 
+                                className="filter__item"
+                            >
+                                <input 
+                                    name="rate" 
+                                    type="radio"
+                                    id={`filter_${item.rateTypeId.name}`}
+                                    value={item.rateTypeId.name}
+                                    onChange={() => setChoosenRate(item)} 
+                                    checked={choosenRate && (choosenRate.id === item.id)}
+                                />
+                                <label htmlFor={`filter_${item.rateTypeId.name}`}>
+                                    {`${item.rateTypeId.name}, ${item.price} `}&#8381;{`/${item.rateTypeId.unit}`}
+                                </label>
+                            </div>
+                        ))    
+                    }
                 </div>
             </div>
             
             <div className="option">
-                <p className="option__title">Тариф</p>
+                <p className="option__title">Доп. услуги</p>
                 <div className="option__content">
-                    <div className="option__item">
-                        <input 
-                            name="type" 
-                            type="checkbox"
-                            id="add_full_tank"
-                            value="full"
-                            // onChange={(evt) => applyFilter(evt.target.value)} 
-                            // checked={filterEntity === "all"}
-                        />
-                        <label htmlFor="add_full_tank">Полный бак, 500 &#8381;</label>
-                    </div>
-
-                    <div className="option__item">
-                        <input 
-                            name="type" 
-                            type="checkbox"
-                            id="add_child_chair"
-                            value="chair"
-                            // onChange={(evt) => applyFilter(evt.target.value)} 
-                            // checked={filterEntity === "all"}
-                        />
-                        <label htmlFor="add_child_chair">На сутки, 200 &#8381;</label>
-                    </div>
-
-                    <div className="option__item">
-                        <input 
-                            name="type" 
-                            type="checkbox"
-                            id="add_right_wheel"
-                            value="wheel"
-                            // onChange={(evt) => applyFilter(evt.target.value)} 
-                            // checked={filterEntity === "all"}
-                        />
-                        <label htmlFor="add_right_wheel">На сутки, 1600 &#8381;</label>
-                    </div>
+                    {
+                        additionalOptionsArr.map(item => (
+                            <div key={item.value} className="option__item">
+                                <input 
+                                    name={item.value}
+                                    type="checkbox"
+                                    id={item.value}
+                                    value={item.value}
+                                    onChange={() => applyAdditionalOption(item)} 
+                                    checked={additionalOptions[item.value] === true}
+                                />
+                                <label htmlFor={item.value}>
+                                    {item.title}, {item.price} &#8381;
+                                </label>
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
         </div>

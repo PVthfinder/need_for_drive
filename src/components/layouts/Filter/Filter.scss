@@ -9,18 +9,20 @@
     color: $darkGreyColor;
 
     &__item {
-            margin-left: 20px;
-            
+        margin-left: 20px;
+        
 
-            &:not(:last-child) {
-                margin-right: 16px;
-                margin-bottom: 8px;
-            }
+        &:not(:last-child) {
+            margin-right: 16px;
+            margin-bottom: 8px;
+        }
 
         input[type="radio"] {
             display: none;
 
             &:checked + label {
+                color: $mainBlackColor;
+
                 &::before {
                     border: 3px solid $mainAccentColor;
                 }
@@ -44,6 +46,10 @@
                 transform: translate(-100%, -50%);
                 transition: border 0.1s ease-in;
             }
+        }
+      
+        label {
+            display: block;
 
             &::first-letter {
                 text-transform: uppercase;

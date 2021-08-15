@@ -13,7 +13,11 @@ const initialState = {
     isActiveBtn: false,
     townValue: "",
     pointValue: "",
-    order: null,
+    order: {
+        isFullTank: false,
+        isNeedChildChair: false,
+        isRightWheel: false
+    },
     towns: [],
     filteredTowns: [],
     points: [],
@@ -26,10 +30,24 @@ const initialState = {
     cars: [],
     filteredCars: [],
     carsCategories: [],
-    carCategory: "all",
+    carCategory: "any",
     choosenCar: null,
     paginationPage: 0,
-    carColor: "all"
+    carColor: "any",
+    dateFrom: "",
+    dateTo: "",
+    rentDurationMin: 0,
+    rentDurationHours: 0,
+    rentDurationDays: 0,
+    rates: [],
+    choosenRate: null,
+    price: 0,
+    additionalOptions: {
+        isFullTank: null,
+        isNeedChildChair: null,
+        isRightWheel: null
+    },
+    isValidPrice: false
 };
 
 export const ContextProvider = ({children}) => {
@@ -117,6 +135,42 @@ export const ContextProvider = ({children}) => {
 
     value.setCarColor = (color) => {
         dispatch({type: 'SET_CAR_COLOR', payload: color});
+    }
+
+    value.setDateFrom = (dateFromValue) => {
+        dispatch({type: 'SET_DATE_FROM', payload: dateFromValue});
+    }
+
+    value.setDateTo = (dateToValue) => {
+        dispatch({type: 'SET_DATE_TO', payload: dateToValue});
+    }
+
+    value.setRentDuration = () => {
+        dispatch({type: 'SET_RENT_DURATION'});
+    }
+
+    value.setRates = (data) => {
+        dispatch({type: 'SET_RATES', payload: data});
+    }
+
+    value.setChoosenRate = (rate) => {
+        dispatch({type: 'SET_CHOOSEN_RATE', payload: rate});
+    }
+
+    value.setPrice = () => {
+        dispatch({type: 'SET_PRICE'});
+    }
+
+    value.setAdditionalOption = (optionValue) => {
+        dispatch({type: 'SET_ADDITIONAL_OPTION', payload: optionValue});
+    }
+
+    value.setPriceWithAdditionalOption = (optionObj) => {
+        dispatch({type: 'SET_PRICE_WITH_ADDITIONAL_OPTION', payload: optionObj});
+    }
+
+    value.setValidPrice = () => {
+        dispatch({type: 'SET_VALID_PRICE'});
     }
 
     // value.setCompetitions = (data, search) => {

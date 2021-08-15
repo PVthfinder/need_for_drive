@@ -28,9 +28,17 @@ const getCarsCategories = async () => {
     return await response.json();
 };
 
+const getRates = async () => {
+    const response = await fetch(`${API_URL}rate`, {
+        headers: API_HEADERS
+    });
+    return await response.json();
+};
+
 export {
     getAllCars, 
     getCarsCategories,
     getTowns,
-    getPoints
+    getPoints,
+    getRates
 };

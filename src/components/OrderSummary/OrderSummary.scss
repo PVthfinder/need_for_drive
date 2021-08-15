@@ -52,6 +52,10 @@
             max-width: 105px;
             word-break: normal;
             text-align: end;
+
+            &::first-letter {
+                text-transform: uppercase;
+            }
         }
 
         &:not(:last-child) {

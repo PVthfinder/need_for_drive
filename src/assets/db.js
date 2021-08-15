@@ -82,3 +82,21 @@ export const breadscrumbs = {
 export const defaultTownCoord = [54.314192, 48.403132];
 
 export const defaultZoom = 11;
+
+export const additionalOptionsArr = [
+    {
+        title: "Полный бак",
+        value: "isFullTank",
+        price: 500
+    },
+    {
+        title: "Детское кресло",
+        value: "isNeedChildChair",
+        price: 200
+    },
+    {
+        title: "Правый руль",
+        value: "isRightWheel",
+        price: 1600
+    }
+];
