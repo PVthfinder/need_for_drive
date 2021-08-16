@@ -85,7 +85,10 @@ function OrderSummary({btnOptions}) {
                     let newItem = valuesForSummaryItem(item);
                     return (
                         newItem ?
-                        <div className="order_content__summary_item">
+                        <div
+                            key={newItem.title} 
+                            className="order_content__summary_item"
+                        >
                             <span>{newItem.title}</span>
                             <span className="dots_border"></span>
                             <span className="item_value">
@@ -100,7 +103,10 @@ function OrderSummary({btnOptions}) {
             {
                 additionalOptionsArr.map(item => (
                     additionalOptions[item.value] ?
-                    <div className="order_content__summary_item">
+                    <div 
+                        key={item.value}
+                        className="order_content__summary_item"
+                    >
                         <span>{item.title}</span>
                         <span className="dots_border"></span>
                         <span className="item_value">
@@ -109,6 +115,18 @@ function OrderSummary({btnOptions}) {
                     </div> :
                     null
                 ))
+            }
+            
+            {
+                !isValidPrice ?
+                <div className="order_content__summary_item">
+                    <span>Текущая цена</span>
+                    <span className="dots_border"></span>
+                    <span className="item_value">
+                        {price.toLocaleString()} &#8381;
+                    </span>
+                </div> :
+                null
             }
 
             <p className="order_content__total_price">

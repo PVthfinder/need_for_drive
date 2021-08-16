@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */ //ошибка линтера 
+
 import React, {useContext, useEffect} from "react";
 
 import { AppContext } from '../../context';
@@ -27,25 +29,23 @@ function Location() {
     } = useContext(AppContext);
 
     useEffect(() => {
-        getTowns().then(data => setTowns(data.data));
-        //eslint-disable-next-line
+        getTowns()
+            .then(data => data ? setTowns(data.data) : null);
     }, []);
 
     useEffect(() => {
         setFilteredTowns(townValue);
-        //eslint-disable-next-line
     }, [townValue]);
 
     useEffect(() => {
         if (filteredTowns.length === 1) { 
-            getPoints(filteredTowns[0].id).then(data => setPoints(data.data, filteredTowns[0]));
+            getPoints(filteredTowns[0].id)
+                .then(data => data ? setPoints(data.data, filteredTowns[0]) : null);
         }
-        //eslint-disable-next-line
     }, [filteredTowns]);
 
     useEffect(() => {
         setFilteredPoints(pointValue);
-        //eslint-disable-next-line
     }, [pointValue]);
 
     return (

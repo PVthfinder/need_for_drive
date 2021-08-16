@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */ //ошибка линтера 
+
 import React, {useContext, useEffect} from "react";
 
 import { AppContext } from "../../context";
@@ -23,14 +25,14 @@ function Models() {
     } = useContext(AppContext);
 
     useEffect(() => {
-        getAllCars(paginationPage).then(data => setCars(data.data));
+        getAllCars(paginationPage)
+            .then(data => data ? setCars(data.data) : null);
         setActiveBtn(false);
-        //eslint-disable-next-line
     }, [paginationPage]);
 
     useEffect(() => {
-        getCarsCategories().then(data => setCarsCategories(data.data));
-        //eslint-disable-next-line
+        getCarsCategories()
+            .then(data => data ? setCarsCategories(data.data) : null);
     }, []);
 
     return (

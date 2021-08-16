@@ -12,7 +12,11 @@ function Model({model}) {
         setActiveBtn
     } =useContext(AppContext);
 
-    const active = choosenCar ? choosenCar.id === id ?? false : false;
+    let active = false;
+
+    if (choosenCar) {
+        active = choosenCar.id === id ?? false;
+    }
 
     const carCardClasses = classNames(
         "car_card", 

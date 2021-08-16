@@ -1,5 +1,4 @@
 import { createContext, useReducer } from "react";
-// import {useLocation} from "react-router-dom";
 
 import reducer from "./reducer";
 
@@ -52,10 +51,6 @@ const initialState = {
 
 export const ContextProvider = ({children}) => {
     const [value, dispatch] = useReducer(reducer, initialState);
-    
-    // const {search} = useLocation();
-
-    // const searchParams = new URLSearchParams(search);
 
     value.setOnNextSlide = (slidesLength) => {
         dispatch({type: 'SET_ON_NEXT_SLIDE', payload: slidesLength});
@@ -172,18 +167,6 @@ export const ContextProvider = ({children}) => {
     value.setValidPrice = () => {
         dispatch({type: 'SET_VALID_PRICE'});
     }
-
-    // value.setCompetitions = (data, search) => {
-    //     dispatch({type: 'SET_COMPETITIONS', payload: {data, search}});
-    // }
-
-    // value.getUrlSearchValue = (str) => {
-    //     if(search.includes(str)){
-    //         return searchParams.get(str);
-    //     } else {
-    //         return '';
-    //     }
-    // }
 
     return (
         <AppContext.Provider value={value}>

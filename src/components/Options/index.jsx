@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */ //ошибка линтера 
+
 import React, {useContext, useEffect} from "react";
 
 import { AppContext } from "../../context";
@@ -42,31 +44,24 @@ function Options() {
     }
 
     useEffect(() => {
-        if (!order.price) {
-            setActiveBtn(false);
-        }
-        getRates().then(data => setRates(data.data));
-        //eslint-disable-next-line
+        getRates()
+            .then(data => data ? setRates(data.data) : null);
     }, []);
 
     useEffect(() => {
         setRentDuration();
-        //eslint-disable-next-line
     }, [dateFrom, dateTo]);
 
     useEffect(() => {
         setPrice();
-        //eslint-disable-next-line
     }, [dateFrom, dateTo, choosenRate]);
 
     useEffect(() => {
         setValidPrice();
-        //eslint-disable-next-line
     }, [price]);
 
     useEffect(() => {
         setActiveBtn(isValidPrice);
-        //eslint-disable-next-line
     }, [isValidPrice]);
 
     return (

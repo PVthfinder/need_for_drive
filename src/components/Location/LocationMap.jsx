@@ -1,7 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */ //ошибка линтера 
+
 import React, {useContext, useEffect, useRef} from "react";
 import { YMaps, Map, Placemark } from "react-yandex-maps";
 
 import { AppContext } from '../../context';
+
+import { YMAPS_QUERY } from "../../config";
 
 import mark from "../../assets/images/map_point.svg";
 
@@ -19,11 +23,6 @@ function LocationMap() {
 
     const maps = useRef();
 
-    const ymapsQuery = {
-        ns: "use-load-option",
-        apikey: "8c90fd8a-c183-4c74-8251-ef9e96797de6"
-    };
-
     useEffect(() => {
         if (maps.current) {
             if (!choosenTown) {
@@ -35,7 +34,6 @@ function LocationMap() {
                 ));
             }
         }
-        //eslint-disable-next-line
     }, [choosenTown]);
 
     useEffect(() => {
@@ -47,7 +45,6 @@ function LocationMap() {
                 ))
         );    
         setMapPointsCoord(newPointsArr);
-        //eslint-disable-next-line
     }, [points]);
 
     useEffect(() => {
@@ -64,7 +61,6 @@ function LocationMap() {
                     ));
             }
         }
-        //eslint-disable-next-line
     }, [choosenPoint]);
 
     const mapState = {
@@ -75,7 +71,7 @@ function LocationMap() {
     return (
         <div className="map">
             <YMaps
-                query={ymapsQuery}>
+                query={YMAPS_QUERY}>
                 <p className="map__heading">Выбрать на карте</p>
                 <Map 
                     instanceRef={maps}
