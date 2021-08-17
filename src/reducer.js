@@ -332,7 +332,8 @@ function reducer (state, {type, payload}) {
 
             return {
                 ...state,
-                isValidPrice: isValidPrice
+                isValidPrice: isValidPrice,
+                isActiveBtn: isValidPrice
             };
 
         default:

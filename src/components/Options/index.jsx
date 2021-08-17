@@ -60,10 +60,6 @@ function Options() {
         setValidPrice();
     }, [price]);
 
-    useEffect(() => {
-        setActiveBtn(isValidPrice);
-    }, [isValidPrice]);
-
     return (
         <div className="order_content__options">
             <div className="option">
