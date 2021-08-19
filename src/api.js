@@ -7,7 +7,7 @@ const getTowns = async () => {
         });
         return await response.json();
     } catch (err) {
-        console.log("Возникла проблема с запросом: ", err);
+        console.error("Возникла проблема с запросом: ", err);
         alert("Возникла проблема с запросом!");
     }
 };
@@ -19,7 +19,7 @@ const getPoints = async (townId) => {
         });
         return await response.json();
     } catch (err) {
-        console.log("Возникла проблема с запросом: ", err);
+        console.error("Возникла проблема с запросом: ", err);
         alert("Возникла проблема с запросом!");
     }
 };
@@ -31,7 +31,7 @@ const getAllCars = async (page) => {
         });
         return await response.json();
     } catch (err) {
-        console.log("Возникла проблема с запросом: ", err);
+        console.error("Возникла проблема с запросом: ", err);
         alert("Возникла проблема с запросом!");
     }
 };
@@ -43,7 +43,7 @@ const getCarsCategories = async () => {
         });
         return await response.json();
     } catch (err) {
-        console.log("Возникла проблема с запросом: ", err);
+        console.error("Возникла проблема с запросом: ", err);
         alert("Возникла проблема с запросом!");
     }
 };
@@ -55,7 +55,7 @@ const getRates = async () => {
         });
         return await response.json();
     } catch (err) {
-        console.log("Возникла проблема с запросом: ", err);
+        console.error("Возникла проблема с запросом: ", err);
         alert("Возникла проблема с запросом!");
     }
 };
