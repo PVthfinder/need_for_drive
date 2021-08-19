@@ -46,7 +46,10 @@ const initialState = {
         isNeedChildChair: null,
         isRightWheel: null
     },
-    isValidPrice: false
+    isValidPrice: false,
+    isOpenApplyOrder: false,
+    registeredOrder: null,
+    isRedirect: false
 };
 
 export const ContextProvider = ({children}) => {
@@ -166,6 +169,18 @@ export const ContextProvider = ({children}) => {
 
     value.setValidPrice = () => {
         dispatch({type: 'SET_VALID_PRICE'});
+    }
+
+    value.setOpenApplyOrder = (isOpenApplyOrder) => {
+        dispatch({type: 'SET_OPEN_APPLY_ORDER', payload: isOpenApplyOrder});
+    }
+
+    value.setRegisteredOrder = (orderObj) => {
+        dispatch({type: 'SET_REGISTERED_ORDER', payload: orderObj});
+    }
+
+    value.setIsRedirect = (redirect) => {
+        dispatch({type: 'SET_IS_REDIRECT', payload: redirect});
     }
 
     return (

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */ //ошибка линтера 
+
 import React, {useState, useEffect} from "react";
 import classNames from 'classnames';
 
@@ -54,7 +56,6 @@ function InputField({
             setIsError(true);
             setInputValue("");
         };
-        // eslint-disable-next-line
     }, [inputValue]);
 
     return (

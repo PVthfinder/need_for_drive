@@ -9,7 +9,7 @@ import { additionalOptionsArr } from "../../assets/db";
 
 import "./OrderSummary.scss";
 
-function OrderSummary({btnOptions}) {
+function OrderSummary({btnOptions, isOnclick}) {
     const {
         order,
         choosenPoint,
@@ -22,7 +22,8 @@ function OrderSummary({btnOptions}) {
         choosenRate,
         price,
         additionalOptions,
-        isValidPrice
+        isValidPrice,
+        setOpenApplyOrder
     } = useContext(AppContext);
 
     const valuesForSummaryItem = (itemKey) => {
@@ -73,6 +74,13 @@ function OrderSummary({btnOptions}) {
 
             default:
                 return null
+        }
+    }
+
+    const openApplyOrder = (evt) => {
+        if (isOnclick) {
+            evt.preventDefault();
+            setOpenApplyOrder(true);
         }
     }
 
@@ -145,6 +153,7 @@ function OrderSummary({btnOptions}) {
                     title={btnOptions.title} 
                     location="btn--order"
                     isActiveBtn={isActiveBtn}
+                    onclick={(evt) => openApplyOrder(evt)}
                 />
             </Link>
         </div>

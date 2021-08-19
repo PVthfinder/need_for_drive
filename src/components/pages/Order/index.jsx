@@ -10,6 +10,8 @@ import OrderSummary from '../../OrderSummary';
 import Location from '../../Location';
 import Models from '../../Models';
 import Options from '../../Options';
+import SummaryInfo from '../../SummaryInfo';
+import ApplyOrder from '../../ApplyOrder';
 
 import "./Order.scss";
 
@@ -55,35 +57,9 @@ function Order() {
             return <Models />;
         } else if (pathname.includes('options')) {
             return <Options />;
+        } else if (pathname.includes('summary')) {
+            return <SummaryInfo />;
         }
-    }
-
-    useEffect(() => {
-        getAllCars(paginationPage)
-            .then(data => {
-                setCars(currentCars => [...currentCars, ...data.data]);
-                setFilteredCars(currentCars => [...currentCars, ...data.data]);
-            });
-    }, [paginationPage]);
-
-    useEffect(() => {
-        if (category !== "all") {
-            const newCarsArr = cars.filter(item => (
-                    item.categoryId ?
-                    item.categoryId.name === category :
-                    false
-                ));
-            setFilteredCars(newCarsArr);
-        } else {
-            setFilteredCars(cars);
-        }
-        //eslint-disable-next-line
-    }, [category]);
-
-    const onScroll = (evt) => {
-        if (evt.target.offsetHeight + evt.target.scrollTop === evt.target.scrollHeight) {
-            setPaginationPage(currentPage => currentPage + 1);
-          }
     }
 
     return (
@@ -103,9 +79,11 @@ function Order() {
                     </div>
                     <OrderSummary 
                         btnOptions={btnOptions()}
+                        isOnclick={pathname.includes('summary')}
                     />
                 </div>
             </div>
+            <ApplyOrder />
         </>
     )
 }

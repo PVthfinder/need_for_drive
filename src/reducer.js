@@ -336,6 +336,24 @@ function reducer (state, {type, payload}) {
                 isActiveBtn: isValidPrice
             };
 
+        case 'SET_OPEN_APPLY_ORDER': 
+            return {
+                ...state,
+                isOpenApplyOrder: payload
+            };
+
+        case 'SET_REGISTERED_ORDER': 
+            return {
+                ...state,
+                registeredOrder: payload
+            };
+
+        case 'SET_IS_REDIRECT': 
+            return {
+                ...state,
+                isRedirect: payload
+            };
+
         default:
             return state;
     }
