@@ -9,4 +9,9 @@ const API_HEADERS = {
     'Authorization': API_AUTH
 };
 
-export {API_HEADERS, API_URL};
+const YMAPS_QUERY = {
+    ns: "use-load-option",
+    apikey: "8c90fd8a-c183-4c74-8251-ef9e96797de6"
+};
+
+export {API_HEADERS, API_URL, YMAPS_QUERY};

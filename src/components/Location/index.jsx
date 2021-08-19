@@ -1,46 +1,77 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */ //ошибка линтера 
 
-import LocationItem from "./LocationItem";
+import React, {useContext, useEffect} from "react";
+
+import { AppContext } from '../../context';
+
+import InputField from "../layouts/InputField";
 import LocationMap from "./LocationMap";
+
+import { getTowns, getPoints } from "../../api";
 
 import "./Location.scss";
 
-function Location({
-    towns, 
-    points, 
-    filteredPoints,
-    townValue, 
-    setTownValue, 
-    pointValue, 
-    setPointValue, 
-    choosenTown,
-    choosenPoint
-}) {
+function Location() {
+    const {
+        townValue,
+        pointValue,
+        setTownValue,
+        setPointValue,
+        filteredTowns, 
+        setTowns, 
+        setFilteredTowns,
+        filteredPoints, 
+        setPoints,
+        setFilteredPoints,
+        setChoosenTown,
+        setChoosenPoint,
+        setActiveBtn
+    } = useContext(AppContext);
+
+    useEffect(() => {
+        getTowns()
+            .then(data => data ? setTowns(data.data) : null);
+    }, []);
+
+    useEffect(() => {
+        setFilteredTowns(townValue);
+    }, [townValue]);
+
+    useEffect(() => {
+        if (filteredTowns.length === 1) { 
+            getPoints(filteredTowns[0].id)
+                .then(data => data ? setPoints(data.data, filteredTowns[0]) : null);
+        }
+    }, [filteredTowns]);
+
+    useEffect(() => {
+        setFilteredPoints(pointValue);
+    }, [pointValue]);
+
     return (
         <div className="order_content__location">
             <div className="location_inputs">
-                <LocationItem
+                <InputField
                     inputValue={townValue}
                     setInputValue={setTownValue}
-                    selectorArr={towns}
+                    setChoosen={setChoosenTown}
+                    selectorArr={filteredTowns}
                     label="Город"
-                    placeholder="город"
+                    placeholder="Начните вводить город..."
                 />
 
-                <LocationItem
+                <InputField
                     inputValue={pointValue}
                     setInputValue={setPointValue}
+                    setChoosen={setChoosenPoint}
                     selectorArr={filteredPoints}
+                    setActiveBtn={setActiveBtn}
                     label="Пункт выдачи"
-                    placeholder="пункт"
+                    placeholder="Начните вводить пункт..."
                 />
             </div>
             
-            <LocationMap 
-                town={choosenTown && choosenTown.name}
-                choosenPoint={choosenPoint && choosenPoint.address}
-                points={points}
-            />
+            <LocationMap />
         </div>
     )
 }

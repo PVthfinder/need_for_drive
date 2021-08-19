@@ -3,52 +3,6 @@
 .order_content {
     &__models {
         height: 0;
-
-        .radios {
-            display: flex;
-            flex-wrap: wrap;
-            font-family: $fontLight;
-            font-size: $fontSizeSimpleText;
-            line-height: $lineHeightSimpleText;
-            color: $darkGreyColor;
-
-            .car_category {
-                    margin-left: 20px;
-
-                    &:not(:last-child) {
-                        margin-right: 16px;
-                    }
-
-                input{
-                    display: none;
-
-                    &:checked + label {
-                        &::before {
-                            border: 3px solid $mainAccentColor;
-                        }
-                    }
-                }
-                
-                label {
-                    position: relative;
-                    cursor: pointer;
-
-                    &::before {
-                        content: "";
-                        width: 12px;
-                        height: 12px;
-                        border-radius: 50%;
-                        border: 1px solid $darkGreyColor;
-                        box-sizing: border-box;
-                        position: absolute;
-                        top: 50%;
-                        left: -8px;
-                        transform: translate(-100%, -50%);
-                        transition: border 0.1s ease-in;
-                    }
-                }
-            }
-        }
     }
 
     &__cars {

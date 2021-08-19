@@ -72,34 +72,31 @@ export const socials = [
     }
 ];
 
-export const breadscrumbs = [
-    "Местоположение",
-    "Модель",
-    "Дополнительно",
-    "Итого"
-];
+export const breadscrumbs = {
+    "Местоположение": "/order/location",
+    "Модель": "/order/model",
+    "Дополнительно": "/order/options",
+    "Итого": "/order/total"
+};
 
-// export const locations = {
-//     "Ульяновск": [
-//             "Нариманова 42",
-//             "Гончарова 2",
-//             "Локомотивная 94",
-//             "Гая 100"
-//         ],
-//     "Самара": [
-//             "Максима Горького 1",
-//             "Победы 100",
-//             "Авроры 3"
-//         ],
-//     "Казань": [
-//             "Профсоюзная 40",
-//             "Чистопольская 82",
-//             "Фрунзе 5",
-//             "Закиева 9"
-//         ],
-//     "Саранск": [
-//             "Васенко 5",
-//             "Ульянова 6",
-//             "Волгоградская 153"
-//         ]
-//     }
+export const defaultTownCoord = [54.314192, 48.403132];
+
+export const defaultZoom = 11;
+
+export const additionalOptionsArr = [
+    {
+        title: "Полный бак",
+        value: "isFullTank",
+        price: 500
+    },
+    {
+        title: "Детское кресло",
+        value: "isNeedChildChair",
+        price: 200
+    },
+    {
+        title: "Правый руль",
+        value: "isRightWheel",
+        price: 1600
+    }
+];

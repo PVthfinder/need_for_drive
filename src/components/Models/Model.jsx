@@ -1,20 +1,38 @@
-import React from "react";
+import React, {useContext} from "react";
 import classNames from 'classnames';
 
-function Model({model, activeCar, setActiveCar}) {
+import { AppContext } from "../../context";
+
+function Model({model}) {
     const {id, name, priceMin, priceMax, thumbnail} = model;
 
-    const active = activeCar ? activeCar.id === id ?? false : false;
+    const {
+        choosenCar, 
+        setChoosenCar,
+        setActiveBtn
+    } =useContext(AppContext);
+
+    let active = false;
+
+    if (choosenCar) {
+        active = choosenCar.id === id ?? false;
+    }
 
     const carCardClasses = classNames(
         "car_card", 
         {[`active`]: active}
     );
 
+    const choiseHandler = (model) => {
+        setChoosenCar(model);
+        setActiveBtn(true);
+    }
+
+
     return (
         <div 
             className={carCardClasses}
-            onClick={() => setActiveCar(model)}
+            onClick={() => choiseHandler(model)}
         >
             <div className="car_card__name-price">
                 <span className="car_card__name">{name}</span>
@@ -24,7 +42,11 @@ function Model({model, activeCar, setActiveCar}) {
             </div>
             <img 
                 className="car_card__img" 
-                src={thumbnail.path.includes('data') ? thumbnail.path :`https://api-factory.simbirsoft1.com${thumbnail.path}`} 
+                src={
+                    thumbnail.path.includes('data') ? 
+                    thumbnail.path :
+                    `https://api-factory.simbirsoft1.com${thumbnail.path}`
+                } 
                 alt={name} 
             />
         </div>

@@ -1,5 +1,7 @@
-import React, {useState} from "react";
+import React, {useContext} from "react";
 import classNames from 'classnames';
+
+import { AppContext } from '../../context';
 
 import Link from "./Link";
 import Social from "./Social";
@@ -11,19 +13,19 @@ import "./Links.scss";
 import "./Socials.scss";
 import "./OpenedMenu.scss";
 
-function Menu({order}) {    
-    const [openMenu, setOpenMenu] = useState(false);
+function Menu({isOrderPage}) {    
+    const {openMenu, setOpenMenu} = useContext(AppContext);
 
     const menuClasses = classNames(
             "menu__icon", 
             {[`opened`]: openMenu}, 
-            {[`menu_order`]: order}
+            {[`menu_order`]: isOrderPage}
         )
 
     const openedMenuClasses = classNames(
             "opened_menu", 
             {[`opened`]: openMenu},
-            {[`order_menu`]: order}
+            {[`order_menu`]: isOrderPage}
         )
 
     return (
@@ -31,7 +33,7 @@ function Menu({order}) {
             <div className="menu">
                 <div 
                     className={menuClasses} 
-                    onClick={() => setOpenMenu(!openMenu)}
+                    onClick={() => setOpenMenu()}
                 >
                     <span/>
                 </div>

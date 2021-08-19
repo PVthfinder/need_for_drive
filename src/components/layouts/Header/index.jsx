@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
+
+import { AppContext } from '../../../context';
 
 import iconLocation from "../../../assets/images/location_icon.svg";
 
 import "./Header.scss";
 
-function Header({townValue}) {
-    townValue = (townValue && townValue.length)? townValue : '';
+function Header() {
+    const {choosenTown} = useContext(AppContext);
 
     return (
         <header className="page_header">
@@ -18,9 +20,9 @@ function Header({townValue}) {
                 <div 
                     type="text" 
                     className="locality"
-                    style={{width: `${townValue.length * 8}px`}}
+                    style={choosenTown && {width: `${choosenTown.name.length * 8}px`}}
                 >
-                    {townValue}
+                    {choosenTown && choosenTown.name}
                 </div>
             </div>
         </header>

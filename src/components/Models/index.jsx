@@ -1,60 +1,64 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */ //ошибка линтера 
+
+import React, {useContext, useEffect} from "react";
+
+import { AppContext } from "../../context";
 
 import Model from "./Model";
+import Filter from "../layouts/Filter";
+
+import { getAllCars, getCarsCategories } from "../../api";
 
 import "./Models.scss";
 
-function Models({cars, categories, category, setCategory, activeCar, setActiveCar}) {
+function Models() {
+    const {
+        filteredCars, 
+        setCars,
+        setFilteredCars,
+        carsCategories, 
+        setCarsCategories,
+        carCategory, 
+        choosenCar,
+        paginationPage,
+        setActiveBtn
+    } = useContext(AppContext);
+
+    useEffect(() => {
+        getAllCars(paginationPage)
+            .then(data => data ? setCars(data.data) : null);
+        setActiveBtn(false);
+    }, [paginationPage]);
+
+    useEffect(() => {
+        getCarsCategories()
+            .then(data => data ? setCarsCategories(data.data) : null);
+    }, []);
 
     return (
         <div className="order_content__models">
-            <div className="radios">
-                    <div className="car_category">
-                        <input 
-                            name="type" 
-                            type="radio"
-                            id="filter_all"
-                            value="all"
-                            onChange={(evt) => setCategory(evt.target.value)} 
-                            checked={category === "all"}
-                        />
-                        <label htmlFor="filter_all">All</label>
-                    </div>
-                    {
-                        categories.length && categories.map(item => (
-                            <div
-                                key={item.id} 
-                                className="car_category"
-                            >
-                                <input 
-                                    name="type" 
-                                    type="radio"
-                                    id={`filter_${item.name}`}
-                                    value={item.name}
-                                    onChange={(evt) => setCategory(evt.target.value)} 
-                                    checked={category === item.name}
-                                />
-                                <label htmlFor={`filter_${item.name}`}>{item.name}</label>
-                            </div>
-                        ))
-                    }
-                </div>
+            <Filter 
+                commonTitle="Все модели"
+                filterEntity={carCategory}
+                optionsArr={carsCategories}
+                applyFilter={setFilteredCars}
+            />
                 
-                {
-                    cars.length ? 
-                    <div className="order_content__cars">
-                        {cars.map(item => (
-                            <Model 
-                                key={item.id}
-                                model={item}
-                                activeCar={activeCar}
-                            />
-                        ))}
-                    </div> :
-                    <p className="order_content__nothing_found">
-                        Приносим извинения, нет машин выбранного класса.
-                    </p>
-                }
+            {
+                filteredCars.length ? 
+                <div className="order_content__cars">
+                    {filteredCars.map(item => (
+                        <Model 
+                            key={item.id}
+                            model={item}
+                            choosenCar={choosenCar}
+                        />
+                    ))}
+                </div> :
+                <p className="order_content__nothing_found">
+                    Приносим извинения, нет машин выбранного класса.
+                </p>
+            }
         </div>
     )
 }

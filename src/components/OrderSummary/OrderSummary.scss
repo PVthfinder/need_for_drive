@@ -34,7 +34,7 @@
         color: $darkGreyColor;
         justify-content: space-between;
         align-items: flex-end;
-        display: none;
+        display: flex;
 
         span{
             &:first-child {
@@ -52,20 +52,16 @@
             max-width: 105px;
             word-break: normal;
             text-align: end;
+
+            &::first-letter {
+                text-transform: uppercase;
+            }
         }
 
         &:not(:last-child) {
             margin-bottom: 16px;
         }
     }
-}
-
-@media (max-width: $desctopSize) {
-  .order_content {
-    &__summary {
-        width: 300px;
-    }
-  }
 }
 
 @media (max-width: $tabletSize) {

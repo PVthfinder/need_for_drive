@@ -27,7 +27,7 @@ function Home() {
                     <Link to="/order/location">
                         <Button 
                         title="Забронировать"
-                        activeBtn={true}
+                        isActiveBtn={true}
                         />
                     </Link>
                 </main>
