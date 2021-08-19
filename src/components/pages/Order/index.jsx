@@ -1,39 +1,80 @@
-import React,{useState, useEffect} from 'react';
+import React, {useContext} from 'react';
+import {useLocation} from 'react-router-dom';
 
+import { AppContext } from "../../../context";
+
+import Menu from '../../Menu';
 import Header from "../../layouts/Header";
-import Breadscrumbs from '../../layouts/Breadscrumbs';
+import Breadcrumbs from '../../layouts/Breadcrumbs';
 import OrderSummary from '../../OrderSummary';
 import Location from '../../Location';
+import Models from '../../Models';
+import Options from '../../Options';
 
 import "./Order.scss";
 
 function Order() {
-    const [townValue, setTownValue] = useState('');
-    const [pointValue, setPointValue] = useState('');
-    const [activeBtn, setActiveBtn] = useState(false);
+    const {setPaginationPage} = useContext(AppContext);
+    
+    const {pathname} = useLocation();
 
-    useEffect(() => {
-        setActiveBtn(townValue.length && pointValue.length);
-    }, [townValue, pointValue]);
+    const onScroll = (evt) => {
+        if (evt.target.offsetHeight + evt.target.scrollTop === evt.target.scrollHeight) {
+            setPaginationPage();
+          }
+    }
+
+    const btnOptions = () => {
+        if (pathname.includes("location")) {
+            return {
+                title: "Выбрать модель",
+                link: "models"
+            };
+        } else if (pathname.includes("model")) {
+            return {
+                title: "Дополнительно",
+                link: "options"
+            };
+        } else if (pathname.includes("options")) {
+            return {
+                title: "Итого",
+                link: "summary"
+            };
+        } else if (pathname.includes("summary")) {
+            return {
+                title: "Заказать",
+                link: "#!"
+            };
+        }
+    }
+
+    const componentSelector = () => {
+        if (pathname.includes('location')) {
+            return <Location />;
+        } else if (pathname.includes('model')) {
+            return <Models />;
+        } else if (pathname.includes('options')) {
+            return <Options />;
+        }
+    }
 
     return (
         <>
+            <Menu
+                isOrderPage={pathname.includes('order')}
+            />
             <div className="page">
-                <Header townValue={townValue}/>
-                <Breadscrumbs/>
+                <Header/>
+                <Breadcrumbs/>
                 <div className="order_content">
-                    <div className="order_content__main">
-                        <Location 
-                            townValue={townValue}
-                            setTownValue={setTownValue}
-                            pointValue={pointValue}
-                            setPointValue={setPointValue}
-                        />
+                    <div 
+                        className="order_content__main"  
+                        onScroll={(evt) => onScroll(evt)}
+                    >
+                        {componentSelector()}
                     </div>
-                    <OrderSummary
-                        town={townValue}
-                        pointValue={pointValue}
-                        activeBtn={activeBtn}
+                    <OrderSummary 
+                        btnOptions={btnOptions()}
                     />
                 </div>
             </div>

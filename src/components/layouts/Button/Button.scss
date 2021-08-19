@@ -71,14 +71,6 @@
     }
 }
 
-@media (max-width: $desctopSize) {
-    .btn {
-        &--order {
-            width: 200px;
-        }
-    }
-}
-
 @media (max-width: $tabletSize) {
     .btn {
         width: 100%;

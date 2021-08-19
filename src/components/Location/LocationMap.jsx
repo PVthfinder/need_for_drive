@@ -1,61 +1,77 @@
-import React, {useState, useEffect, useRef} from "react";
+/* eslint-disable react-hooks/exhaustive-deps */ //ошибка линтера 
+
+import React, {useContext, useEffect, useRef} from "react";
 import { YMaps, Map, Placemark } from "react-yandex-maps";
+
+import { AppContext } from '../../context';
+
+import { YMAPS_QUERY } from "../../config";
 
 import mark from "../../assets/images/map_point.svg";
 
-function LocationMap({town, point, points}) {
-    const [zoom, setZoom] = useState(3)
-    const [centerCoord, setCenterCoord] = useState([64.010196, 98.911043]);
-    const [pointsCoord, setPointsCoord] = useState([]);
+function LocationMap() {
+    const {
+        choosenTown,
+        choosenPoint,
+        mapZoom,
+        mapCenterCoord,
+        setMapCenter,
+        points,
+        mapPointsCoord,
+        setMapPointsCoord
+    } = useContext(AppContext);
 
     const maps = useRef();
 
     useEffect(() => {
         if (maps.current) {
-            if (!point) {
-                maps.current.geocode(town)
-                .then(result => setCenterCoord(
-                    result.geoObjects.get(0).geometry.getCoordinates()
-                ));
-                setZoom(11);
+            if (!choosenTown) {
+                setMapCenter();
             } else {
-                maps.current.geocode(`${town} ${point}`)
-                .then(result => setCenterCoord(
+                maps.current.geocode(choosenTown.name)
+                .then(result => setMapCenter(
                     result.geoObjects.get(0).geometry.getCoordinates()
                 ));
-                setZoom(15);
             }
         }
-        //eslint-disable-next-line
-    }, [town, point]);
+    }, [choosenTown]);
 
     useEffect(() => {
-        if(points) {      
-            const newPointsArr = [];
-            points.map(item => (
-                maps.current.geocode(`${town} ${item}`)
-                    .then(result => newPointsArr.push(
-                        result.geoObjects.get(0).geometry.getCoordinates()
-                    ))
-            ));
-
-            setPointsCoord(newPointsArr);
-        }
-        //eslint-disable-next-line
+        const newPointsArr = [];
+        points.map(item => 
+            maps.current.geocode(`${item.cityId.name} ${item.address}`)
+                .then(result => newPointsArr.push(
+                    result.geoObjects.get(0).geometry.getCoordinates()
+                ))
+        );    
+        setMapPointsCoord(newPointsArr);
     }, [points]);
 
+    useEffect(() => {
+        if (choosenTown) {
+            if(choosenPoint) {      
+                maps.current.geocode(`${choosenPoint.cityId.name} ${choosenPoint.address}`)
+                    .then(result => setMapCenter(
+                        result.geoObjects.get(0).geometry.getCoordinates(), 15
+                    ));
+            } else {
+                maps.current.geocode(choosenTown.name)
+                    .then(result => setMapCenter(
+                        result.geoObjects.get(0).geometry.getCoordinates()
+                    ));
+            }
+        }
+    }, [choosenPoint]);
+
     const mapState = {
-        center: centerCoord,
-        zoom: zoom,
+        center: mapCenterCoord,
+        zoom: mapZoom,
       };
 
     return (
         <div className="map">
             <YMaps
-                query={{
-                    ns: "use-load-option",
-                    apikey: "8c90fd8a-c183-4c74-8251-ef9e96797de6"
-                }}>
+                query={YMAPS_QUERY}>
                 <p className="map__heading">Выбрать на карте</p>
                 <Map 
                     instanceRef={maps}
@@ -69,7 +85,7 @@ function LocationMap({town, point, points}) {
                     ]}
                     onLoad={(ymaps) => maps.current = ymaps}
                 >
-                    {pointsCoord.map(
+                    {mapPointsCoord && mapPointsCoord.map(
                         point => 
                             <Placemark 
                                 key={point} 

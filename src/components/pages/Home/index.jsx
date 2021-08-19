@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+import Menu from '../../Menu';
 import Slider from "../../Slider";
 import Header from "../../layouts/Header";
 import Footer from "../../layouts/Footer";
@@ -13,6 +14,7 @@ import "./Home.scss";
 function Home() {
     return (
         <>
+            <Menu/>
             <div className="page">
                 <Header/>
                 <main className="home_content"> 
@@ -22,10 +24,10 @@ function Home() {
                     <p className="home_content__desc">
                         Поминутная аренда авто твоего города
                     </p>
-                    <Link to="/order">
+                    <Link to="/order/location">
                         <Button 
                         title="Забронировать"
-                        activeBtn={true}
+                        isActiveBtn={true}
                         />
                     </Link>
                 </main>

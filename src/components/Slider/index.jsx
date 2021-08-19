@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
+
+import { AppContext } from '../../context';
 
 import Slide from './Slide';
 import Arrow from './Arrow';
@@ -7,15 +9,7 @@ import Dots from './Dots';
 import './Slider.scss';
 
 function Slider({slides}) {
-    const [activeSlide, setActiveSlide] = useState(0);
-    
-    const onNextSlide = () => {
-        setActiveSlide((current) => current === slides.length -1 ? 0 : current + 1)
-    }
-
-    const onPrevSlide = () => {
-        setActiveSlide((current) => current ? current - 1 : slides.length -1)
-    }
+    const {activeSlide, setOnNextSlide, setOnPrevSlide} = useContext(AppContext);
 
     const prevImgIndex = activeSlide ? activeSlide - 1 : slides.length - 1;
 
@@ -50,8 +44,8 @@ function Slider({slides}) {
                     {slides[nextImgIndex].img}
                 </div> */}
             </div>
-            <Arrow direction="left" handleClick={onPrevSlide}/>
-            <Arrow direction="right" handleClick={onNextSlide}/>
+            <Arrow direction="left" handleClick={() => setOnPrevSlide(slides.length)}/>
+            <Arrow direction="right" handleClick={() => setOnNextSlide(slides.length)}/>
             <Dots slides={slides} activeSlide={activeSlide}/>
         </div>
     )

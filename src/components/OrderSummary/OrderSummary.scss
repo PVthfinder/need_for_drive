@@ -34,7 +34,7 @@
         color: $darkGreyColor;
         justify-content: space-between;
         align-items: flex-end;
-        display: none;
+        display: flex;
 
         span{
             &:first-child {
@@ -52,22 +52,21 @@
             max-width: 105px;
             word-break: normal;
             text-align: end;
+
+            &::first-letter {
+                text-transform: uppercase;
+            }
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 16px;
         }
     }
-}
-
-@media (max-width: $desctopSize) {
-  .order_content {
-    &__summary {
-        width: 300px;
-    }
-  }
 }
 
 @media (max-width: $tabletSize) {
     .order_content {
         &__summary {
-            flex-grow: 1;
             width: 100%;
             border-left: none;
             border-top: 1px solid $lightkGreyColor;

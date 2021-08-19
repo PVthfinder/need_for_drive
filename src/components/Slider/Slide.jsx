@@ -22,12 +22,12 @@ function Slide({prevImgIndex, nextImgIndex, slide}) {
         >
             <h2 className="slide__heading">{slide.heading}</h2>
             <p className="slide__description">{slide.desc}</p>
-            <Link to="/order">
+            <Link to="/order/location">
                 <Button 
                     title="Подробнее" 
                     color={slide.color} 
                     location="btn--slider"
-                    activeBtn={true}
+                    isActiveBtn={true}
                 />
             </Link>
         </div>
