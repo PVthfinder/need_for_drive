@@ -6,7 +6,7 @@
     border-top: 1px solid $lightkGreyColor;
     border-bottom: 1px solid $lightkGreyColor;
 
-    a {
+    &__link {
         font-family: $fontBold;
         font-size: $fontSizeSimpleText;
         line-height: $lineHeightSimpleText;
@@ -22,6 +22,15 @@
             right: calc(100% + 16px);
         }
 
+        &.filled_step {
+          color: $mainBlackColor;
+        }
+
+        &.disabled {
+          pointer-events: none;
+        }
+        
+        &.active, 
         &:hover {
             color: $mainAccentColor;
         }

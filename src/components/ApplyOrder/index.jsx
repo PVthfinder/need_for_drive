@@ -52,14 +52,14 @@ function ApplyOrder() {
             <div className="apply_order__buttons">
                 <Button 
                     title="Подтвердить"
-                    location="btn--apply_order"
+                    location="apply_order"
                     isActiveBtn={true}
                     onclick={sendOrder}
                 />
                 <Button 
                     title="Вернуться"
                     color="red"
-                    location="btn--apply_order"
+                    location="apply_order"
                     isActiveBtn={true}
                     onclick={closeApplyOrder}
                 />

@@ -151,7 +151,7 @@ function OrderSummary({btnOptions, isOnclick}) {
             <Link to={`/order/${btnOptions.link}`}>
                 <Button 
                     title={btnOptions.title} 
-                    location="btn--order"
+                    location="order"
                     isActiveBtn={isActiveBtn}
                     onclick={(evt) => openApplyOrder(evt)}
                 />

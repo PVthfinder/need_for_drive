@@ -24,6 +24,7 @@ function Location() {
         setPoints,
         setFilteredPoints,
         setChoosenTown,
+        choosenPoint,
         setChoosenPoint,
         setActiveBtn
     } = useContext(AppContext);
@@ -31,6 +32,7 @@ function Location() {
     useEffect(() => {
         getTowns()
             .then(data => data ? setTowns(data.data) : null);
+        choosenPoint && setActiveBtn(true);
     }, []);
 
     useEffect(() => {

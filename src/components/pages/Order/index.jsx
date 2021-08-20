@@ -16,7 +16,9 @@ import ApplyOrder from '../../ApplyOrder';
 import "./Order.scss";
 
 function Order() {
-    const {setPaginationPage} = useContext(AppContext);
+    const {
+        setPaginationPage
+    } = useContext(AppContext);
     
     const {pathname} = useLocation();
 
@@ -69,7 +71,7 @@ function Order() {
             />
             <div className="page">
                 <Header/>
-                <Breadcrumbs/>
+                <Breadcrumbs />
                 <div className="order_content">
                     <div 
                         className="order_content__main"  
