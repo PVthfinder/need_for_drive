@@ -92,7 +92,7 @@ function OrderSummary({btnOptions, isOnclick}) {
                 Object.keys(order).map(item => {
                     let newItem = valuesForSummaryItem(item);
                     return (
-                        newItem ?
+                        newItem &&
                         <div
                             key={newItem.title} 
                             className="order_content__summary_item"
@@ -102,15 +102,14 @@ function OrderSummary({btnOptions, isOnclick}) {
                             <span className="item_value">
                                 {newItem.value}
                             </span>
-                        </div> :
-                        null
+                        </div>
                     )
                 })
             }
 
             {
                 additionalOptionsArr.map(item => (
-                    additionalOptions[item.value] ?
+                    additionalOptions[item.value] &&
                     <div 
                         key={item.value}
                         className="order_content__summary_item"
@@ -120,21 +119,19 @@ function OrderSummary({btnOptions, isOnclick}) {
                         <span className="item_value">
                             Да
                         </span>
-                    </div> :
-                    null
+                    </div>
                 ))
             }
             
             {
-                !isValidPrice ?
+                !isValidPrice &&
                 <div className="order_content__summary_item">
                     <span>Текущая цена</span>
                     <span className="dots_border"></span>
                     <span className="item_value">
                         {price.toLocaleString()} &#8381;
                     </span>
-                </div> :
-                null
+                </div>
             }
 
             <p className="order_content__total_price">

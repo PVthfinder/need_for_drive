@@ -37,7 +37,6 @@ function ApplyOrder() {
         }).then(data => {
             setRegisteredOrder(data.data); 
             setIsRedirect(true);
-            // return <Redirect to={`registeredOrder/${data.data.id}`}/>
         })
 
     }

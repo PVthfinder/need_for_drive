@@ -18,7 +18,7 @@ function RegisteredOrder() {
     const {setRegisteredOrder} = useContext(AppContext);
 
     useEffect(() => {
-        getOrderById(orderId).then(data => {setRegisteredOrder(data.data); console.log(data.data);});
+        getOrderById(orderId).then(data => setRegisteredOrder(data.data));
     }, [orderId])
 
     return (

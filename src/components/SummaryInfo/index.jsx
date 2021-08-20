@@ -27,15 +27,11 @@ function SummaryInfo() {
             <div className="summary_info__desc">
                 <p className="summary_info__car_name">{choosenCar.name}</p>
                 <p className="summary_info__item number">
-                    {
-                    choosenCar.number ?
-                    changeNumberFormat(choosenCar.number): 
-                    null
-                    }
+                    {choosenCar.number && changeNumberFormat(choosenCar.number)}
                 </p>
                 {
                     additionalOptionsArr.map(item => (
-                        additionalOptions[item.value] ?
+                        additionalOptions[item.value] &&
                         <div 
                             key={item.value}
                             className="summary_info__item"
@@ -53,8 +49,7 @@ function SummaryInfo() {
                                     </span> {item.title}
                                 </p>
                             }
-                        </div> :
-                        null
+                        </div>
                     ))
                 }
                 <p className="summary_info__item">
