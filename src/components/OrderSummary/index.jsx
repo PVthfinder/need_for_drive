@@ -9,7 +9,7 @@ import { additionalOptionsArr } from "../../assets/db";
 
 import "./OrderSummary.scss";
 
-function OrderSummary({btnOptions}) {
+function OrderSummary({btnOptions, isOnclick}) {
     const {
         order,
         choosenPoint,
@@ -22,7 +22,8 @@ function OrderSummary({btnOptions}) {
         choosenRate,
         price,
         additionalOptions,
-        isValidPrice
+        isValidPrice,
+        setOpenApplyOrder
     } = useContext(AppContext);
 
     const valuesForSummaryItem = (itemKey) => {
@@ -76,6 +77,13 @@ function OrderSummary({btnOptions}) {
         }
     }
 
+    const openApplyOrder = (evt) => {
+        if (isOnclick) {
+            evt.preventDefault();
+            setOpenApplyOrder(true);
+        }
+    }
+
     return (
         <div className="order_content__summary">
             <h2 className="order_content__summary_heading">Ваш заказ</h2>
@@ -84,7 +92,7 @@ function OrderSummary({btnOptions}) {
                 Object.keys(order).map(item => {
                     let newItem = valuesForSummaryItem(item);
                     return (
-                        newItem ?
+                        newItem &&
                         <div
                             key={newItem.title} 
                             className="order_content__summary_item"
@@ -94,15 +102,14 @@ function OrderSummary({btnOptions}) {
                             <span className="item_value">
                                 {newItem.value}
                             </span>
-                        </div> :
-                        null
+                        </div>
                     )
                 })
             }
 
             {
                 additionalOptionsArr.map(item => (
-                    additionalOptions[item.value] ?
+                    additionalOptions[item.value] &&
                     <div 
                         key={item.value}
                         className="order_content__summary_item"
@@ -112,21 +119,19 @@ function OrderSummary({btnOptions}) {
                         <span className="item_value">
                             Да
                         </span>
-                    </div> :
-                    null
+                    </div>
                 ))
             }
             
             {
-                !isValidPrice ?
+                !isValidPrice &&
                 <div className="order_content__summary_item">
                     <span>Текущая цена</span>
                     <span className="dots_border"></span>
                     <span className="item_value">
                         {price.toLocaleString()} &#8381;
                     </span>
-                </div> :
-                null
+                </div>
             }
 
             <p className="order_content__total_price">
@@ -143,8 +148,9 @@ function OrderSummary({btnOptions}) {
             <Link to={`/order/${btnOptions.link}`}>
                 <Button 
                     title={btnOptions.title} 
-                    location="btn--order"
+                    location="order"
                     isActiveBtn={isActiveBtn}
+                    onclick={(evt) => openApplyOrder(evt)}
                 />
             </Link>
         </div>

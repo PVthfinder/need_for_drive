@@ -27,7 +27,7 @@ function Models() {
     useEffect(() => {
         getAllCars(paginationPage)
             .then(data => data ? setCars(data.data) : null);
-        setActiveBtn(false);
+        choosenCar ? setActiveBtn(true) : setActiveBtn(false);
     }, [paginationPage]);
 
     useEffect(() => {

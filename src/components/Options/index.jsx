@@ -24,7 +24,6 @@ function Options() {
         dateTo,
         setDateTo,
         setRentDuration,
-        setActiveBtn,
         rates,
         setRates,
         choosenRate,
@@ -34,7 +33,6 @@ function Options() {
         additionalOptions,
         setAdditionalOption,
         setPriceWithAdditionalOption,
-        isValidPrice,
         setValidPrice
     } =useContext(AppContext);
 
