@@ -60,10 +60,41 @@ const getRates = async () => {
     }
 };
 
+const send = async (bodyObj) => {
+    try{
+        const response = await fetch(`${API_URL}order`, {
+            method: 'POST',
+            headers: {
+                ...API_HEADERS,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bodyObj)
+        })
+        return await response.json();
+    } catch (err) {
+        console.error("Возникла проблема с запросом: ", err);
+        alert("Возникла проблема с запросом!");
+    }
+};
+
+const getOrderById = async (orderId) => {
+    try{
+        const response = await fetch(`${API_URL}order/${orderId}`, {
+            headers: API_HEADERS
+        });
+        return await response.json();
+    } catch (err) {
+        console.error("Возникла проблема с запросом: ", err);
+        alert("Возникла проблема с запросом!");
+    }
+};
+
 export {
     getAllCars, 
     getCarsCategories,
     getTowns,
     getPoints,
-    getRates
+    getRates,
+    send,
+    getOrderById
 };
