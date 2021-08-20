@@ -37,18 +37,20 @@ function LocationMap() {
     }, [choosenTown]);
 
     useEffect(() => {
-        const newPointsArr = [];
-        points.map(item => 
-            maps.current.geocode(`${item.cityId.name} ${item.address}`)
-                .then(result => newPointsArr.push(
-                    result.geoObjects.get(0).geometry.getCoordinates()
-                ))
-        );    
-        setMapPointsCoord(newPointsArr);
+        if (maps.current) {
+            const newPointsArr = [];
+            points.map(item => 
+                maps.current.geocode(`${item.cityId.name} ${item.address}`)
+                    .then(result => newPointsArr.push(
+                        result.geoObjects.get(0).geometry.getCoordinates()
+                    ))
+            );    
+            setMapPointsCoord(newPointsArr);
+        }
     }, [points]);
 
     useEffect(() => {
-        if (choosenTown) {
+        if (maps.current && choosenTown) {
             if(choosenPoint) {      
                 maps.current.geocode(`${choosenPoint.cityId.name} ${choosenPoint.address}`)
                     .then(result => setMapCenter(

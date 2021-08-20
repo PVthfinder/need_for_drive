@@ -74,9 +74,9 @@ export const socials = [
 
 export const breadscrumbs = {
     "Местоположение": "/order/location",
-    "Модель": "/order/model",
+    "Модель": "/order/models",
     "Дополнительно": "/order/options",
-    "Итого": "/order/total"
+    "Итого": "/order/summary"
 };
 
 export const defaultTownCoord = [54.314192, 48.403132];

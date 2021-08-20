@@ -1,0 +1,46 @@
+@import "../../variables";
+
+.order_content {
+    &__summary_page {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        font-family: $fontRegular;
+        color: $mainBlackColor;
+    }
+}
+
+.summary_info {
+    &__desc {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    &__car_name {
+        font-size: $fontSizeSummaryHeading;
+        line-height: $lineHeightSummaryHeading;
+    }
+
+    &__item {
+        font-size: $fontSizeSimpleText;
+        line-height: $lineHeightSimpleText;
+        margin-top: 8px;
+    }
+
+    &__img {
+        width: 256px;
+    }
+
+    &__item_heading {
+        font-family: $fontBold;
+    }
+
+    .number {
+        padding: 4px 8px;
+        border: 1px solid $darkGreyColor;
+        border-radius: 4px;
+        box-sizing: border-box;
+        text-transform: uppercase;
+    }
+}

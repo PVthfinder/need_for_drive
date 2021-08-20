@@ -10,11 +10,15 @@ import OrderSummary from '../../OrderSummary';
 import Location from '../../Location';
 import Models from '../../Models';
 import Options from '../../Options';
+import SummaryInfo from '../../SummaryInfo';
+import ApplyOrder from '../../ApplyOrder';
 
 import "./Order.scss";
 
 function Order() {
-    const {setPaginationPage} = useContext(AppContext);
+    const {
+        setPaginationPage
+    } = useContext(AppContext);
     
     const {pathname} = useLocation();
 
@@ -55,6 +59,8 @@ function Order() {
             return <Models />;
         } else if (pathname.includes('options')) {
             return <Options />;
+        } else if (pathname.includes('summary')) {
+            return <SummaryInfo />;
         }
     }
 
@@ -65,7 +71,7 @@ function Order() {
             />
             <div className="page">
                 <Header/>
-                <Breadcrumbs/>
+                <Breadcrumbs />
                 <div className="order_content">
                     <div 
                         className="order_content__main"  
@@ -75,9 +81,11 @@ function Order() {
                     </div>
                     <OrderSummary 
                         btnOptions={btnOptions()}
+                        isOnclick={pathname.includes('summary')}
                     />
                 </div>
             </div>
+            <ApplyOrder />
         </>
     )
 }
