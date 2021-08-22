@@ -1,19 +1,10 @@
-import React, {useContext} from "react";
-
-import {AppContext} from "../../context";
+import React from "react";
 
 import {additionalOptionsArr} from "../../assets/db";
 
 import "./SummaryInfo.scss";
 
-function SummaryInfo() {
-    const {
-        choosenCar,
-        additionalOptions,
-        dateFrom,
-        dateTo
-    } = useContext(AppContext);
-
+function SummaryInfo({choosenCar,additionalOptions, dateFrom, dateTo}) {
     const changeNumberFormat = (str) => {
         let strArr = str.split("");
         strArr[0] = strArr[0] + " ";

@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 
 import { AppContext } from '../../context';
 
@@ -9,7 +9,7 @@ import { additionalOptionsArr } from "../../assets/db";
 
 import "./OrderSummary.scss";
 
-function OrderSummary({btnOptions, isOnclick}) {
+function OrderSummary({btnOptions, isOnclick, btnOnclick}) {
     const {
         order,
         choosenPoint,
@@ -25,6 +25,8 @@ function OrderSummary({btnOptions, isOnclick}) {
         isValidPrice,
         setOpenApplyOrder
     } = useContext(AppContext);
+
+    const {pathname} = useLocation();
 
     const valuesForSummaryItem = (itemKey) => {
         switch (itemKey) {
@@ -81,6 +83,14 @@ function OrderSummary({btnOptions, isOnclick}) {
         if (isOnclick) {
             evt.preventDefault();
             setOpenApplyOrder(true);
+        }
+    }
+
+    const onclickAction = (evt) => {
+        if (pathname.includes("summary")) {
+            return openApplyOrder(evt);
+        } else if (pathname.includes("registeredOrder")) {
+            return btnOnclick(evt);
         }
     }
 
@@ -150,7 +160,8 @@ function OrderSummary({btnOptions, isOnclick}) {
                     title={btnOptions.title} 
                     location="order"
                     isActiveBtn={isActiveBtn}
-                    onclick={(evt) => openApplyOrder(evt)}
+                    onclick={(evt) => onclickAction(evt)}
+                    color={btnOptions.color}
                 />
             </Link>
         </div>

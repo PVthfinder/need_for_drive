@@ -17,7 +17,11 @@ import "./Order.scss";
 
 function Order() {
     const {
-        setPaginationPage
+        setPaginationPage,
+        choosenCar,
+        additionalOptions,
+        dateFrom,
+        dateTo
     } = useContext(AppContext);
     
     const {pathname} = useLocation();
@@ -60,7 +64,12 @@ function Order() {
         } else if (pathname.includes('options')) {
             return <Options />;
         } else if (pathname.includes('summary')) {
-            return <SummaryInfo />;
+            return <SummaryInfo 
+                choosenCar={choosenCar}
+                additionalOptions={additionalOptions}
+                dateFrom={dateFrom}
+                dateTo={dateTo}
+            />;
         }
     }
 

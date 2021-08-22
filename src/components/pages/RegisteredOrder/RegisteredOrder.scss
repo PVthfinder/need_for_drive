@@ -1,0 +1,33 @@
+@import "../../../variables";
+
+.order_id {
+    padding: 8px 64px 7px;
+    border-top: 1px solid $lightkGreyColor;
+    border-bottom: 1px solid $lightkGreyColor;
+    font-family: $fontBold;
+    font-size: $fontSizeSimpleText;
+    line-height: $lineHeightSimpleText;
+    color: $mainBlackColor;
+}
+
+.order_content {
+    &__order_status {
+        font-family: $fontRegular;
+        font-size: $fontSizeApplyOrderHeading;
+        line-height: $lineHeightApplyOrderHeading;
+        color: $mainBlackColor;
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: $desctopSize) {
+    .order_id {
+        padding: 8px 32px 7px;
+    }
+}
+
+@media (max-width: $tabletSize) {
+    .order_id {
+        padding: 8px 16px;
+    }
+}
