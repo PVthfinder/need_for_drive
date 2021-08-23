@@ -26,11 +26,14 @@ function RegisteredOrder() {
     } = useContext(AppContext);
 
     useEffect(() => {
-        getOrderById(orderId).then(data => setRegisteredOrder(data.data));
+        getOrderById(orderId).then(data => data && setRegisteredOrder(data.data));
         setIsRedirect(false);
-        if (registeredOrder && registeredOrder.orderStatusId.id !== "5e26a1f5099b810b946c5d8c")
-            setActiveBtn(true);
     }, [])
+
+    useEffect(() => {
+        registeredOrder && registeredOrder.orderStatusId.id !== "5e26a1f5099b810b946c5d8c" &&
+            setActiveBtn(true);
+    }, [registeredOrder]);
 
     const additionalOptions = registeredOrder && {
         isFullTank: registeredOrder.isFullTank,
@@ -55,11 +58,10 @@ function RegisteredOrder() {
                 isOrderPage={pathname.includes('registeredOrder')}
             />
             <div className="page">
-                <Header/>
-                {registeredOrder && 
-                    <>                    
-                    <div className="order_id">Заказ номер {registeredOrder.id}</div>
-                
+                <Header/>                   
+                <div className="order_id">Заказ номер {orderId}</div>
+                {registeredOrder ? 
+                    <>                 
                     <div className="order_content">
                         <div className="order_content__main">
                             <div className="order_content__order_status">
@@ -69,7 +71,7 @@ function RegisteredOrder() {
                                     "отменен"
                                 }
                             </div>
-                            
+
                             <SummaryInfo
                                 choosenCar={registeredOrder.carId}
                                 additionalOptions={additionalOptions}
@@ -83,6 +85,7 @@ function RegisteredOrder() {
                             choosenTown={registeredOrder.cityId}
                             choosenPoint={registeredOrder.pointId}
                             choosenCar={registeredOrder.carId}
+                            carColor={registeredOrder.color}
                             choosenRate={registeredOrder.rateId}
                             additionalOptions={additionalOptions}
                             isValidPrice={true}
@@ -96,7 +99,10 @@ function RegisteredOrder() {
                             btnOnclick={changeOrder}
                         />
                     </div>
-                    </>
+                    </> :
+                    <div className="order_content__main">
+                        Извините, невозможно получить данные...
+                    </div>
                 }
             </div>
         </>
