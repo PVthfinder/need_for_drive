@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */ //ошибка линтера 
+
 import React, {useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 

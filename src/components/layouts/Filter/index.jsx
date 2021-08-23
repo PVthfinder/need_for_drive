@@ -19,7 +19,7 @@ function Filter({commonTitle, filterEntity, optionsArr, applyFilter}) {
                 </div>
             }
             {
-                optionsArr && optionsArr.length && 
+                optionsArr && optionsArr.length > 0 && 
                 optionsArr.map(item => (
                     <div
                         key={item.id ?? item} 

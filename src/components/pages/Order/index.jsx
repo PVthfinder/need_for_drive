@@ -18,8 +18,15 @@ import "./Order.scss";
 function Order() {
     const {
         setPaginationPage,
+        order,
+        choosenTown,
+        choosenPoint,
         choosenCar,
+        carColor,
         additionalOptions,
+        choosenRate,
+        isValidPrice,
+        price,
         dateFrom,
         dateTo
     } = useContext(AppContext);
@@ -89,6 +96,15 @@ function Order() {
                         {componentSelector()}
                     </div>
                     <OrderSummary 
+                        order={order}
+                        choosenTown={choosenTown}
+                        choosenPoint={choosenPoint}
+                        choosenCar={choosenCar}
+                        carColor={carColor}
+                        choosenRate={choosenRate}
+                        additionalOptions={additionalOptions}
+                        isValidPrice={isValidPrice}
+                        price={price}
                         btnOptions={btnOptions()}
                         isOnclick={pathname.includes('summary')}
                     />

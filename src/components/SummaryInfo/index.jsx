@@ -17,9 +17,12 @@ function SummaryInfo({choosenCar,additionalOptions, dateFrom, dateTo}) {
         <div className="order_content__summary_page summary_info">
             <div className="summary_info__desc">
                 <p className="summary_info__car_name">{choosenCar.name}</p>
-                <p className="summary_info__item number">
-                    {choosenCar.number && changeNumberFormat(choosenCar.number)}
-                </p>
+                {
+                    choosenCar.number && 
+                    <p className="summary_info__item number">
+                        {changeNumberFormat(choosenCar.number)}
+                    </p>
+                }
                 {
                     additionalOptionsArr.map(item => (
                         additionalOptions[item.value] &&

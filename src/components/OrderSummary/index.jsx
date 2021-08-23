@@ -9,20 +9,25 @@ import { additionalOptionsArr } from "../../assets/db";
 
 import "./OrderSummary.scss";
 
-function OrderSummary({btnOptions, isOnclick, btnOnclick}) {
+function OrderSummary({
+    order,
+    choosenTown,
+    choosenPoint,
+    choosenCar,
+    carColor,
+    choosenRate,
+    additionalOptions,
+    isValidPrice,
+    price,
+    btnOptions, 
+    isOnclick, 
+    btnOnclick
+}) {
     const {
-        order,
-        choosenPoint,
         isActiveBtn, 
-        choosenCar,
-        carColor,
         rentDurationMin,
         rentDurationHours,
         rentDurationDays,
-        choosenRate,
-        price,
-        additionalOptions,
-        isValidPrice,
         setOpenApplyOrder
     } = useContext(AppContext);
 
@@ -33,7 +38,7 @@ function OrderSummary({btnOptions, isOnclick, btnOnclick}) {
             case "pointId":
                 return {
                     title: "Пункт выдачи",
-                    value: `${choosenPoint.cityId.name}, ${choosenPoint.address}`
+                    value: `${choosenTown.name}, ${choosenPoint.address}`
                 }
                 
             case "carId":
@@ -63,7 +68,7 @@ function OrderSummary({btnOptions, isOnclick, btnOnclick}) {
                     rentDurationStr += ` ${rentDurationMin % 60}мин`
                 }
 
-                return {
+                return rentDurationStr.length > 0 && {
                     title: "Длительность аренды",
                     value: rentDurationStr
                 }
