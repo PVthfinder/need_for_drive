@@ -1,19 +1,10 @@
-import React, {useContext} from "react";
-
-import {AppContext} from "../../context";
+import React from "react";
 
 import {additionalOptionsArr} from "../../assets/db";
 
 import "./SummaryInfo.scss";
 
-function SummaryInfo() {
-    const {
-        choosenCar,
-        additionalOptions,
-        dateFrom,
-        dateTo
-    } = useContext(AppContext);
-
+function SummaryInfo({choosenCar,additionalOptions, dateFrom, dateTo}) {
     const changeNumberFormat = (str) => {
         let strArr = str.split("");
         strArr[0] = strArr[0] + " ";
@@ -26,9 +17,12 @@ function SummaryInfo() {
         <div className="order_content__summary_page summary_info">
             <div className="summary_info__desc">
                 <p className="summary_info__car_name">{choosenCar.name}</p>
-                <p className="summary_info__item number">
-                    {choosenCar.number && changeNumberFormat(choosenCar.number)}
-                </p>
+                {
+                    choosenCar.number && 
+                    <p className="summary_info__item number">
+                        {changeNumberFormat(choosenCar.number)}
+                    </p>
+                }
                 {
                     additionalOptionsArr.map(item => (
                         additionalOptions[item.value] &&

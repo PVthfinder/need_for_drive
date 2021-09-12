@@ -1,5 +1,9 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */ //ошибка линтера 
+
+import React, {useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
+
+import { AppContext } from '../../../context';
 
 import Menu from '../../Menu';
 import Slider from "../../Slider";
@@ -12,6 +16,14 @@ import {images} from '../../../assets/db';
 import "./Home.scss";
 
 function Home() {
+    const {
+        setInitialState
+    } = useContext(AppContext);
+
+    useEffect(() => {
+        setInitialState();
+    }, []);
+
     return (
         <>
             <Menu/>

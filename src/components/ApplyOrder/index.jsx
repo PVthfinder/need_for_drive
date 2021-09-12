@@ -30,7 +30,7 @@ function ApplyOrder() {
         setOpenApplyOrder(false);
     }
 
-    const sendOrder = () => {
+    const sendNewOrder = () => {
         send({
             orderStatusId: {id: "5e26a191099b810b946c5d89"},
             ...order
@@ -53,7 +53,7 @@ function ApplyOrder() {
                     title="Подтвердить"
                     location="apply_order"
                     isActiveBtn={true}
-                    onclick={sendOrder}
+                    onclick={sendNewOrder}
                 />
                 <Button 
                     title="Вернуться"

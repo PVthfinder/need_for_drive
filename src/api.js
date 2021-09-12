@@ -77,6 +77,23 @@ const send = async (bodyObj) => {
     }
 };
 
+const change = async (bodyObj) => {
+    try{
+        const response = await fetch(`${API_URL}order/${bodyObj.id}`, {
+            method: 'PUT',
+            headers: {
+                ...API_HEADERS,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bodyObj)
+        })
+        return await response.json();
+    } catch (err) {
+        console.error("Возникла проблема с запросом: ", err);
+        alert("Возникла проблема с запросом!");
+    }
+};
+
 const getOrderById = async (orderId) => {
     try{
         const response = await fetch(`${API_URL}order/${orderId}`, {
@@ -96,5 +113,6 @@ export {
     getPoints,
     getRates,
     send,
+    change,
     getOrderById
 };
