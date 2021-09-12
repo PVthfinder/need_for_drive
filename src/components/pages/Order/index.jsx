@@ -17,7 +17,18 @@ import "./Order.scss";
 
 function Order() {
     const {
-        setPaginationPage
+        setPaginationPage,
+        order,
+        choosenTown,
+        choosenPoint,
+        choosenCar,
+        carColor,
+        additionalOptions,
+        choosenRate,
+        isValidPrice,
+        price,
+        dateFrom,
+        dateTo
     } = useContext(AppContext);
     
     const {pathname} = useLocation();
@@ -60,7 +71,12 @@ function Order() {
         } else if (pathname.includes('options')) {
             return <Options />;
         } else if (pathname.includes('summary')) {
-            return <SummaryInfo />;
+            return <SummaryInfo 
+                choosenCar={choosenCar}
+                additionalOptions={additionalOptions}
+                dateFrom={dateFrom}
+                dateTo={dateTo}
+            />;
         }
     }
 
@@ -80,6 +96,15 @@ function Order() {
                         {componentSelector()}
                     </div>
                     <OrderSummary 
+                        order={order}
+                        choosenTown={choosenTown}
+                        choosenPoint={choosenPoint}
+                        choosenCar={choosenCar}
+                        carColor={carColor}
+                        choosenRate={choosenRate}
+                        additionalOptions={additionalOptions}
+                        isValidPrice={isValidPrice}
+                        price={price}
                         btnOptions={btnOptions()}
                         isOnclick={pathname.includes('summary')}
                     />

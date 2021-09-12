@@ -183,6 +183,10 @@ export const ContextProvider = ({children}) => {
         dispatch({type: 'SET_IS_REDIRECT', payload: redirect});
     }
 
+    value.setInitialState = () => {
+        dispatch({type: 'SET_INITIAL_STATE', payload: initialState});
+    }
+
     return (
         <AppContext.Provider value={value}>
             {children}

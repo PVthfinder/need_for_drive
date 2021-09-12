@@ -354,6 +354,9 @@ function reducer (state, {type, payload}) {
                 isRedirect: payload
             };
 
+        case 'SET_INITIAL_STATE': 
+            return payload;
+
         default:
             return state;
     }
